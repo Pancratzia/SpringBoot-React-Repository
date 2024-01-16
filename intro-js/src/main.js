@@ -1,27 +1,21 @@
-function sayHi(){
-    console.log("Hola, JavaScript desde Vite!");
+const invoice = {
+    id: 1,
+    description: 'Compras de Aparatos Electronicos',
+    date: new Date(),
+    client: "Pancratzia LaItaliana",
+    total: 500
 }
 
-function sayHiInReturn(){
+console.log(invoice)
+console.log(`
+FACTURA DEL COMERCIO DE JAVASCRIPT ELECTROTECH
 
-    const greeting = "Hola para ti también!";
-    //console.log("Hola, JavaScript desde Vite!");
-    return greeting;
-}
+Cliente: ${invoice.client}
+Fecha: ${invoice.date}
+Total: ${invoice.total}$
 
-function sayMyName(name = "JavaScript", respuesta = false) {
+${invoice.description}
+`)
 
-    console.log(`Un gusto. Mi nombre es ${name}! ${respuesta ? 'Es un placer conocerte.' : ''}`);
-}
-
-const question = (q) => console.log(q);
-const answer = (a) => `Mi profesión es ${a}!`;
-
-
-sayHi();
-const greeting = sayHiInReturn();
-console.log(greeting);
-sayMyName("Pancratzia");
-sayMyName(undefined, true);
-question("¿Cual es tu profesión?");
-console.log(answer("Programador Web"));
+invoice.total = 1000
+console.log(`Los atributos del objeto se pueden modificar. Por ejemplo, el total ahora es de ${invoice.total}$`)
