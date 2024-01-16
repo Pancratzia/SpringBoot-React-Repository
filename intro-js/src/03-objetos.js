@@ -44,10 +44,23 @@ const invoice = {
     }
 }
 
+console.log(invoice)
+console.log(`
+FACTURA DEL COMERCIO DE JAVASCRIPT ELECTROTECH
 
-const invoice2 = invoice; // estos objetos son iguales
+Cliente: ${invoice.client.name} ${invoice.client.lastname}
+Fecha: ${invoice.date}
+Total: ${invoice.total()}$
 
-const invoice3 = { ...invoice }; // estos objetos no son iguales
+${invoice.description}
 
-console.log(invoice === invoice2); // true
-console.log(invoice === invoice3); // false
+DETALLES
+
+ITEM | PRECIO | CANTIDAD | SUBTOTAL
+
+${invoice.items.map(item => `${item.product} | ${item.price} | ${item.quantity} | ${item.price * item.quantity}`).join('\n')}
+`)
+
+/*invoice.total = 1000
+console.log(`Los atributos del objeto se pueden modificar. Por ejemplo, el total ahora es de ${invoice.total}$`)*/
+console.log(invoice.greeting())
