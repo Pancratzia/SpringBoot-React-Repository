@@ -1,57 +1,14 @@
-const invoice = {
-    id: 1,
-    description: 'Compras de Aparatos Electronicos',
-    date: new Date(),
-    client: {
-        id: 1,
-        name: 'Pancratzia',
-        lastname: 'LaItaliana',
-        age: 24,
-    },
-    items: [
-        {
-            product: 'keyboard',
-            price: 100,
-            quantity: 1
-        },
-        {
-            product: 'mouse',
-            price: 50,
-            quantity: 2
-        },
-        {
-            product: 'monitor',
-            price: 200,
-            quantity: 1
-        },
-        {
-            product: 'laptop',
-            price: 505,
-            quantity: 1
-        }
-    ],
+const average = 10;
 
-    total: function(){
-        let total = 0
-        for(let i = 0; i < this.items.length; i++){
-            total += this.items[i].price * this.items[i].quantity
-        }
-        return total;
-    },
+const result = average >= 5 ? "aprobado" : "reprobado";
 
-    greeting: function(){
-        return 'Hola! Me llamo ' + this.client.name
-    }
-}
+console.log(`Tu trámite ha sido ${result}`);
 
+const a = 9;
+const b = 10;
+const c = 4;
 
-//console.log(invoice.company.name); //Undefined pero da error en la consola
-console.log(invoice.company?.name); //Undefined y no da error
+let max = a > b ? a : b;
+max = max > c ? max : c;
 
-if(invoice.company?.name){
-    console.log(invoice.company.name);
-}else{
-    console.log('No hay nombre de la empresa');
-}
-
-console.log(invoice.company?.address?.stret);
+console.log(max);
