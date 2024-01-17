@@ -2,20 +2,15 @@ const products = [
     'Sillas', 'Escritorios', 'Mesas'
 ]
 
-console.log(products);
+const fruits = [
+    'Manzana', 'Pera', 'Naranja', 'Sandia', 'Uva',
+]
 
-products.push('Organizadores');
+const compra = [...fruits, ...products]; //con esto se crea una copia de los arreglos y los originales no se modifican. Esto se llama inmnutabilidad. (Spread Operator)
 
-console.log(products);
+let items = [];
+items = items.concat(products, fruits, 'Muñeca', 'Peluche');
 
-products.forEach((product, i) => {
-    console.log(`${i + 1}. ${product}`);
-})
+console.log(compra);
 
-for(const product of products){
-    console.log(product);
-}
-
-for(let i = 0; i < products.length; i++){
-    console.log(products[i]);
-}
+console.log(items);
