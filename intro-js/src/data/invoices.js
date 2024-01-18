@@ -1,4 +1,4 @@
-export const invoices = [
+const invoices = [
   {
     id: 1,
     description: "Compras de Aparatos Electronicos",
@@ -82,6 +82,5 @@ export const invoices = [
 
 const colors = ["Rojo", "Verde", "Azul", "Amarillo"];
 
-export default () => {
-  return colors.length;
-};
+
+export { invoices, colors };
