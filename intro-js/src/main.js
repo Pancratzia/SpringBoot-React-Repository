@@ -1,7 +1,7 @@
-const httpClient = fetch("https://jsonplaceholder.typicode.com/users");
+const findAllUsers = async() =>{
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    return await response.json();
+}
 
-httpClient
-    .then(response => response.json())
-    .then(users => console.log(users))
-
-console.log("Hola, JavaScript desde Vite!"); //Se ejecuta primero debido a que hay un delay en la ejecución del fetch
+const users = await findAllUsers();
+console.log(users);
