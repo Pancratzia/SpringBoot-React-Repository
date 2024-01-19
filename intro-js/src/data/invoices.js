@@ -82,5 +82,7 @@ const invoices = [
 
 const colors = ["Rojo", "Verde", "Azul", "Amarillo"];
 
+const invoiceById = (id) => invoices.find((invoice) => invoice.id === id);
 
-export { invoices, colors };
+
+export { invoices, colors, invoiceById };
