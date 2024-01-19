@@ -84,5 +84,18 @@ const colors = ["Rojo", "Verde", "Azul", "Amarillo"];
 
 const invoiceById = (id) => invoices.find((invoice) => invoice.id === id);
 
+const findInvoiceByID = (id) =>{
+  const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+          try {
+              resolve(invoiceById(id));
+          } catch (error) {
+              reject(error);
+          }
+      }, 2000)
+  })
 
-export { invoices, colors, invoiceById };
+  return promise;
+}
+
+export { invoices, colors, invoiceById, findInvoiceByID };
