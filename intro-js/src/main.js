@@ -1,3 +1,4 @@
+
 import { invoices, colors, invoiceById } from './data/invoices.js';
 
 console.log(invoices);
@@ -13,4 +14,9 @@ const promise = new Promise((resolve, reject) => {
     }, 2000)
 })
 
-console.log(promise.then((result) => console.log(result)).catch((error) => console.log(error)))
+promise.then((json) => 
+{
+    console.log(json);
+    console.log(`La tarea se ha terminado corectmente. La descripción es: ${json.description}`);
+})
+.catch((error) => console.log(error))
