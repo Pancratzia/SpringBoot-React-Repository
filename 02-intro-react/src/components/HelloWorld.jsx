@@ -1,5 +1,4 @@
 
-
-export function HelloWorld() {
-    return <h1>Hello World!</h1>
+export function HelloWorld({langName}) {
+    return <h1>Hello, {langName}!</h1>
 }
