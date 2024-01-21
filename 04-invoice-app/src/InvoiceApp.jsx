@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ClientView from "./components/ClientView";
 import CompanyView from "./components/CompanyView";
 import InvoiceView from "./components/InvoiceView";
@@ -7,6 +8,10 @@ import { getInvoice } from "./services/getInvoice";
 
 function InvoiceApp() {
   const invoice = getInvoice();
+
+  const [productValue, setProductValue] = useState("");
+  const [priceValue, setPriceValue] = useState(0);
+  const [quantityValue, setQuantityValue] = useState(0);
 
   const { id, name, client, company, items, total } = invoice;
 
@@ -35,9 +40,9 @@ function InvoiceApp() {
           <TotalView total={total} />
 
           <form className="mt-5">
-            <input type="text" name="product" placeholder="Producto..." className="form-control my-2" />
-            <input type="number" name="price" placeholder="Precio ($)" className="form-control my-2" />
-            <input type="number" name="quantity" placeholder="Cantidad" className="form-control my-2" />
+            <input type="text" name="product" placeholder="Producto..." className="form-control my-2" onChange={(e) => setProductValue(e.target.value)} value={productValue} />
+            <input type="number" name="price" placeholder="Precio ($)" className="form-control my-2" onChange={(e) => setPriceValue(e.target.value)} value={priceValue} />
+            <input type="number" name="quantity" placeholder="Cantidad" className="form-control my-2" onChange={(e) => setQuantityValue(e.target.value)} value={quantityValue} />
           </form>
           
         </div>
