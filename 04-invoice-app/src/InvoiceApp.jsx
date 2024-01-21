@@ -12,42 +12,41 @@ function InvoiceApp() {
 
   const lastId =
     initialItems.length > 0 ? initialItems[initialItems.length - 1].id : 0;
-  const [productValue, setProductValue] = useState("");
-  const [priceValue, setPriceValue] = useState(0);
-  const [quantityValue, setQuantityValue] = useState(0);
   const [items, setItems] = useState(initialItems);
   const [counter, setCounter] = useState(lastId + 1);
+  const [formItemsState, setFormItemsState] = useState({
+    product: "",
+    price: 0,
+    quantity: 0,
+  });
 
-  const onProductChange = ({target : {value}}) => {
-    setProductValue(value);
+  const { product, price, quantity } = formItemsState;
+
+  const handleInputsChange = ({ target: { name, value } }) => {
+    setFormItemsState({
+      ...formItemsState,
+      [name]: value,
+    });
   };
-
-  const onPriceChange = ({ target: { value } }) => {
-    setPriceValue(value);
-  };
-
-  const onQuantityChange = ({ target: { value } }) => {
-    setQuantityValue(value);
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (
-      productValue.trim() === "" ||
-      priceValue <= 0 ||
-      isNaN(priceValue) ||
-      quantityValue <= 0 ||
-      isNaN(quantityValue)
+      product.trim() === "" ||
+      price <= 0 ||
+      isNaN(price) ||
+      quantity<= 0 ||
+      isNaN(quantity)
     ) {
       alert("Por favor, rellena todos los campos con valores válidos.");
       return;
     }
 
     const newItem = {
-      product: productValue,
-      price: priceValue,
-      quantity: Math.floor(quantityValue),
+      product: product,
+      price: price,
+      quantity: Math.floor(quantity),
       id: counter,
     };
     setItems([...items, newItem]);
@@ -56,9 +55,11 @@ function InvoiceApp() {
   };
 
   const resetForm = () => {
-    setProductValue("");
-    setPriceValue(0);
-    setQuantityValue(0);
+    setFormItemsState({
+      productValue: "",
+      priceValue: 0,
+      quantityValue: 0,
+    });
   };
 
   return (
@@ -98,8 +99,8 @@ function InvoiceApp() {
                 name="product"
                 placeholder="Producto..."
                 className="form-control my-2"
-                onChange={(e) => onProductChange(e)}
-                value={productValue}
+                onChange={handleInputsChange}
+                value={product}
               />
             </div>
 
@@ -110,8 +111,8 @@ function InvoiceApp() {
                 name="price"
                 placeholder="Precio"
                 className="form-control my-2"
-                onChange={(e) => onPriceChange(e)}
-                value={priceValue}
+                onChange={handleInputsChange}
+                value={price}
               />
             </div>
 
@@ -122,8 +123,8 @@ function InvoiceApp() {
                 name="quantity"
                 placeholder="Cantidad"
                 className="form-control my-2"
-                onChange={(e) => onQuantityChange(e)}
-                value={quantityValue}
+                onChange={handleInputsChange}
+                value={quantity}
               />
             </div>
 
