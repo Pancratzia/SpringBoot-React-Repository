@@ -45,11 +45,11 @@ function InvoiceApp() {
         </thead>
 
         <tbody>
-          {items.map((item) => (
-            <tr key={item.product}>
-              <td>{item.product}</td>
-              <td>{item.price}</td>
-              <td>{item.quantity}</td>
+          {items.map(({ product, price, quantity, id }) => (
+            <tr key={id}>
+              <td>{product}</td>
+              <td>{price}</td>
+              <td>{quantity}</td>
             </tr>
           ))}
         </tbody>
