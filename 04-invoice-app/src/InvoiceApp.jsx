@@ -10,22 +10,24 @@ function InvoiceApp() {
   const invoice = getInvoice();
   const { id, name, client, company, items: initialItems, total } = invoice;
 
+  const lastId =
+    initialItems.length > 0 ? initialItems[initialItems.length - 1].id : 0;
   const [productValue, setProductValue] = useState("");
   const [priceValue, setPriceValue] = useState(0);
   const [quantityValue, setQuantityValue] = useState(0);
   const [items, setItems] = useState(initialItems);
+  const [counter, setCounter] = useState(lastId + 1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setItems([
-      ...items,
-      {
-        product: productValue,
-        price: priceValue,
-        quantity: quantityValue,
-        id: Date.now(),
-      },
-    ]);
+    const newItem = {
+      product: productValue,
+      price: priceValue,
+      quantity: quantityValue,
+      id: counter,
+    };
+    setItems([...items, newItem]);
+    setCounter(counter + 1);
     resetForm();
   };
 
