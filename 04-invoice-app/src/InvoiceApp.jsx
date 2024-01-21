@@ -1,3 +1,4 @@
+import InvoiceView from "./components/InvoiceView";
 import { getInvoice } from "./services/getInvoice";
 
 function InvoiceApp() {
@@ -16,11 +17,7 @@ function InvoiceApp() {
         </div>
 
         <div className="card-body">
-          <ul className="list-group">
-            <li className="list-group-item">Id: {id}</li>
-            <li className="list-group-item">Name: {name}</li>
-          </ul>
-
+          <InvoiceView id={id} name={name} />
           <div className="row my-3">
             <div className="col">
               <h3>Datos del cliente</h3>
