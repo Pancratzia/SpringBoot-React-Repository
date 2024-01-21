@@ -1,4 +1,5 @@
 import RowItemView from "./RowItemView";
+import PropTypes from "prop-types";
 
 const ListItemsView = ( { title, items }) => {
   return (
@@ -24,3 +25,8 @@ const ListItemsView = ( { title, items }) => {
 };
 
 export default ListItemsView;
+
+ListItemsView.propTypes = {
+  title: PropTypes.string.isRequired,
+  items: PropTypes.array.isRequired,
+}

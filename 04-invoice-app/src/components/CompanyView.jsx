@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const CompanyView = ({ company }) => {
   const { name: companyName, fiscalNumber, title } = company;
   return (
@@ -12,3 +14,7 @@ const CompanyView = ({ company }) => {
 };
 
 export default CompanyView;
+
+CompanyView.propTypes = {
+  company: PropTypes.object.isRequired,
+}

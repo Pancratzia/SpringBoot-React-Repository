@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const RowItemView = ({ item }) => {
   const { product, price, quantity } = item;
   return (
@@ -10,3 +12,7 @@ const RowItemView = ({ item }) => {
 };
 
 export default RowItemView;
+
+RowItemView.propTypes = {
+  item: PropTypes.object.isRequired,
+}

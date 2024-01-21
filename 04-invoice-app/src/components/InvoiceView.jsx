@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const InvoiceView = ( { id, name }) => {
   return (
     <ul className="list-group">
@@ -8,3 +10,8 @@ const InvoiceView = ( { id, name }) => {
 };
 
 export default InvoiceView;
+
+InvoiceView.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired
+}
