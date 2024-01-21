@@ -3,11 +3,10 @@ import { getInvoice } from "./services/getInvoice";
 function InvoiceApp() {
   const invoice = getInvoice();
 
-  const { id, name, client, company, items } = invoice
-  const { name: clientName, lastName: clientLastName, address } = client
-  const { name: companyName, fiscalNumber } = company
-  const { country, city, street, number } = address
-
+  const { id, name, client, company, items } = invoice;
+  const { name: clientName, lastName: clientLastName, address } = client;
+  const { name: companyName, fiscalNumber } = company;
+  const { country, city, street, number } = address;
 
   return (
     <>
@@ -19,10 +18,14 @@ function InvoiceApp() {
 
       <h3>Datos del cliente</h3>
       <ul>
-        <li>Name: {clientName} {clientLastName}</li>
+        <li>
+          Name: {clientName} {clientLastName}
+        </li>
         <li>Country: {country}</li>
         <li>City: {city}</li>
-        <li>Street: {street} #{number}</li>
+        <li>
+          Street: {street} #{number}
+        </li>
       </ul>
 
       <h3>Datos de la empresa</h3>
@@ -32,6 +35,25 @@ function InvoiceApp() {
       </ul>
 
       <h4>Productos</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {items.map((item) => (
+            <tr key={item.product}>
+              <td>{item.product}</td>
+              <td>{item.price}</td>
+              <td>{item.quantity}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
