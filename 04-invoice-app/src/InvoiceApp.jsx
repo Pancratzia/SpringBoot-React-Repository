@@ -18,6 +18,18 @@ function InvoiceApp() {
   const [items, setItems] = useState(initialItems);
   const [counter, setCounter] = useState(lastId + 1);
 
+  const onProductChange = ({target : {value}}) => {
+    setProductValue(value);
+  };
+
+  const onPriceChange = ({ target: { value } }) => {
+    setPriceValue(value);
+  };
+
+  const onQuantityChange = ({ target: { value } }) => {
+    setQuantityValue(value);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -86,7 +98,7 @@ function InvoiceApp() {
                 name="product"
                 placeholder="Producto..."
                 className="form-control my-2"
-                onChange={(e) => setProductValue(e.target.value)}
+                onChange={(e) => onProductChange(e)}
                 value={productValue}
               />
             </div>
@@ -98,7 +110,7 @@ function InvoiceApp() {
                 name="price"
                 placeholder="Precio"
                 className="form-control my-2"
-                onChange={(e) => setPriceValue(e.target.value)}
+                onChange={(e) => onPriceChange(e)}
                 value={priceValue}
               />
             </div>
@@ -110,7 +122,7 @@ function InvoiceApp() {
                 name="quantity"
                 placeholder="Cantidad"
                 className="form-control my-2"
-                onChange={(e) => setQuantityValue(e.target.value)}
+                onChange={(e) => onQuantityChange(e)}
                 value={quantityValue}
               />
             </div>
