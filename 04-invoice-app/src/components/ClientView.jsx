@@ -1,10 +1,10 @@
-const ClientView = ( { client }) => {
+const ClientView = ( { client, title }) => {
 
     const { name: clientName, lastName: clientLastName, address } = client;
     const { country, city, street, number } = address;
   return (
     <>
-      <h3>Datos del cliente</h3>
+      <h3>{title}</h3>
       <ul className="list-group">
         <li className="list-group-item active">
           Name: {clientName} {clientLastName}
