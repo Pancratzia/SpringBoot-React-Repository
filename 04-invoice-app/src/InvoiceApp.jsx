@@ -20,6 +20,12 @@ function InvoiceApp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if(productValue.trim() === "" || priceValue <= 0 || isNaN(priceValue) || quantityValue <= 0 || isNaN(quantityValue)) {
+      alert("Por favor, rellena todos los campos con valores válidos.");
+      return;
+    }
+
     const newItem = {
       product: productValue,
       price: priceValue,
