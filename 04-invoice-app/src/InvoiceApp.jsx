@@ -2,12 +2,13 @@ import ClientView from "./components/ClientView";
 import CompanyView from "./components/CompanyView";
 import InvoiceView from "./components/InvoiceView";
 import ListItemsView from "./components/ListItemsView";
+import TotalView from "./components/TotalView";
 import { getInvoice } from "./services/getInvoice";
 
 function InvoiceApp() {
   const invoice = getInvoice();
 
-  const { id, name, client, company, items } = invoice;
+  const { id, name, client, company, items, total } = invoice;
 
   return (
     <div className="container">
@@ -31,6 +32,7 @@ function InvoiceApp() {
           <hr className="my-5" />
 
           <ListItemsView title="Items" items={items} />
+          <TotalView total={total} />
           
         </div>
       </div>
