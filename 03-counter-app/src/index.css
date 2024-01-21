@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::after,
+*::before{
+    box-sizing: inherit;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+}
+
+.counterApp{
+    margin: 0 auto;
+    text-align: center;
+    width: min(90%, 120rem);
+}
+
+.counter{
+    background-color: bisque;
+    padding: 10rem;
+    border-radius: 50%;
+}
+
+.counter h1{
+    font-size: 8rem;
+    margin-bottom: 5rem;
+}
+
+.buttons{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.buttons button{
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    border: none;
+    background-color: brown;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.buttons button:hover{
+    cursor: pointer;
+    background-color: burlywood;
+}
