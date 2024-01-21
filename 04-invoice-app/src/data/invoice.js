@@ -1,40 +1,35 @@
 export const invoice = {
-  id: 1,
-  name: "Componentes de PC",
-  client: {
-    name: "Pancratzia",
-    lastname: "LaItaliana",
-    address: {
-      country: "Venezuela",
-      city: "Caracas",
-      street: "Calle 1",
-      number: 300,
+    id: 10,
+    name: 'Componentes PC',
+    client: {
+        name: 'Pepe',
+        lastName: 'Doe',
+        address: {
+            country: 'USA',
+            city: 'Los Angeles',
+            street: 'One Street',
+            number: 12
+        }
     },
-  },
-  company: {
-    name: "PankraComp",
-    fiscalNumber: 123456,
-  },
-  items: [
-    {
-      product: "CPU",
-      quantity: 1,
-      price: 150,
+    company: {
+        name: 'New Egg',
+        fiscalNumber: 1234567,
     },
-    {
-      product: "GPU",
-      quantity: 1,
-      price: 250,
-    },
-    {
-      product: "RAM",
-      quantity: 4,
-      price: 50,
-    },
-    {
-      product: "HDD",
-      quantity: 2,
-      price: 10,
-    },
-  ],
-};
+    items: [
+        {
+            product: 'Cpu Intel i7',
+            price: 499,
+            quantity: 1,
+        },
+        {
+            product: 'Corsair Keyboard Mecanico',
+            price: 150,
+            quantity: 1,
+        },
+        {
+            product: 'Monitor Asus',
+            price: 350,
+            quantity: 1,
+        },
+    ]
+}
