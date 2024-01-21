@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export function HelloWorld({ langName, id, title = "Hello World", fullName }) {
+export function HelloWorld({ langName, id, title, fullName }) {
   const { name, lastname } = fullName;
 
   return (
@@ -22,4 +22,8 @@ HelloWorld.propTypes = {
     name: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired
   })
+}
+
+HelloWorld.defaultProps = {
+  title: "Hello, World!"
 }
