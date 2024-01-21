@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export function HelloWorld({ langName, id, title = "Hello World", fullName }) {
   const { name, lastname } = fullName;
 
@@ -10,4 +12,14 @@ export function HelloWorld({ langName, id, title = "Hello World", fullName }) {
       </p>
     </div>
   );
+}
+
+HelloWorld.propTypes = {
+  langName: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string,
+  fullName: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired
+  })
 }
