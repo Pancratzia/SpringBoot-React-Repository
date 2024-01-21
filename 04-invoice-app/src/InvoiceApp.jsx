@@ -1,3 +1,4 @@
+import ClientView from "./components/ClientView";
 import InvoiceView from "./components/InvoiceView";
 import { getInvoice } from "./services/getInvoice";
 
@@ -20,18 +21,7 @@ function InvoiceApp() {
           <InvoiceView id={id} name={name} />
           <div className="row my-3">
             <div className="col">
-              <h3>Datos del cliente</h3>
-              <ul className="list-group">
-                <li className="list-group-item active">
-                  Name: {clientName} {clientLastName}
-                </li>
-                <li className="list-group-item">
-                  {country} / {city}
-                </li>
-                <li className="list-group-item">
-                  {street} #{number}
-                </li>
-              </ul>
+              <ClientView client={client} />
             </div>
 
             <div className="col">
