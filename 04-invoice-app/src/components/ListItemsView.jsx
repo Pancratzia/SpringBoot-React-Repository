@@ -1,3 +1,5 @@
+import RowItemView from "./RowItemView";
+
 const ListItemsView = ( { title, items }) => {
   return (
     <>
@@ -12,12 +14,8 @@ const ListItemsView = ( { title, items }) => {
         </thead>
 
         <tbody>
-          {items.map(({ product, price, quantity, id }) => (
-            <tr key={id}>
-              <td>{product}</td>
-              <td>{price}</td>
-              <td>{quantity}</td>
-            </tr>
+          {items.map((item) => (
+            <RowItemView key={item.id} item={item} />
           ))}
         </tbody>
       </table>
