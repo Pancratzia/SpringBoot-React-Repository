@@ -1,6 +1,7 @@
 import ClientView from "./components/ClientView";
 import CompanyView from "./components/CompanyView";
 import InvoiceView from "./components/InvoiceView";
+import ListItemsView from "./components/ListItemsView";
 import { getInvoice } from "./services/getInvoice";
 
 function InvoiceApp() {
@@ -29,26 +30,8 @@ function InvoiceApp() {
 
           <hr className="my-5" />
 
-          <h4>Productos</h4>
-          <table className="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {items.map(({ product, price, quantity, id }) => (
-                <tr key={id}>
-                  <td>{product}</td>
-                  <td>{price}</td>
-                  <td>{quantity}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <ListItemsView title="Items" items={items} />
+          
         </div>
       </div>
     </div>
