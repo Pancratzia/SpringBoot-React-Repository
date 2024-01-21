@@ -21,7 +21,13 @@ function InvoiceApp() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(productValue.trim() === "" || priceValue <= 0 || isNaN(priceValue) || quantityValue <= 0 || isNaN(quantityValue)) {
+    if (
+      productValue.trim() === "" ||
+      priceValue <= 0 ||
+      isNaN(priceValue) ||
+      quantityValue <= 0 ||
+      isNaN(quantityValue)
+    ) {
       alert("Por favor, rellena todos los campos con valores válidos.");
       return;
     }
@@ -29,7 +35,7 @@ function InvoiceApp() {
     const newItem = {
       product: productValue,
       price: priceValue,
-      quantity: quantityValue,
+      quantity: Math.floor(quantityValue),
       id: counter,
     };
     setItems([...items, newItem]);
@@ -73,30 +79,41 @@ function InvoiceApp() {
               handleSubmit(e);
             }}
           >
-            <input
-              type="text"
-              name="product"
-              placeholder="Producto..."
-              className="form-control my-2"
-              onChange={(e) => setProductValue(e.target.value)}
-              value={productValue}
-            />
-            <input
-              type="number"
-              name="price"
-              placeholder="Precio ($)"
-              className="form-control my-2"
-              onChange={(e) => setPriceValue(e.target.value)}
-              value={priceValue}
-            />
-            <input
-              type="number"
-              name="quantity"
-              placeholder="Cantidad"
-              className="form-control my-2"
-              onChange={(e) => setQuantityValue(e.target.value)}
-              value={quantityValue}
-            />
+            <div className="form-group d-flex justify-content-center align-items-center gap-2">
+              <label htmlFor="product">Producto: </label>
+              <input
+                type="text"
+                name="product"
+                placeholder="Producto..."
+                className="form-control my-2"
+                onChange={(e) => setProductValue(e.target.value)}
+                value={productValue}
+              />
+            </div>
+
+            <div className="form-group d-flex justify-content-center align-items-center gap-2">
+              <label htmlFor="price">Precio: </label>
+              <input
+                type="number"
+                name="price"
+                placeholder="Precio"
+                className="form-control my-2"
+                onChange={(e) => setPriceValue(e.target.value)}
+                value={priceValue}
+              />
+            </div>
+
+            <div className="form-group d-flex justify-content-center align-items-center gap-2">
+              <label htmlFor="quantity"> Cantidad: </label>
+              <input
+                type="number"
+                name="quantity"
+                placeholder="Cantidad"
+                className="form-control my-2"
+                onChange={(e) => setQuantityValue(e.target.value)}
+                value={quantityValue}
+              />
+            </div>
 
             <button className="btn btn-primary">Añadir</button>
           </form>
