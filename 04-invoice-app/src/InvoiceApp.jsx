@@ -33,6 +33,12 @@ function InvoiceApp() {
 
           <ListItemsView title="Items" items={items} />
           <TotalView total={total} />
+
+          <form className="mt-5">
+            <input type="text" name="product" placeholder="Producto..." className="form-control my-2" />
+            <input type="number" name="price" placeholder="Precio ($)" className="form-control my-2" />
+            <input type="number" name="quantity" placeholder="Cantidad" className="form-control my-2" />
+          </form>
           
         </div>
       </div>
