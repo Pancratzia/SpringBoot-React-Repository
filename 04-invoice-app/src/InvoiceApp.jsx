@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClientView from "./components/ClientView";
 import CompanyView from "./components/CompanyView";
 import InvoiceView from "./components/InvoiceView";
@@ -6,14 +6,31 @@ import ListItemsView from "./components/ListItemsView";
 import TotalView from "./components/TotalView";
 import { getInvoice } from "./services/getInvoice";
 
-function InvoiceApp() {
-  const invoice = getInvoice();
-  const { id, name, client, company, items: initialItems, total } = invoice;
+const invoiceInitial = {
+  id: 0,
+  name: "",
+  client: {
+    name: "",
+    lastName: "",
+    address: {
+      country: "",
+      city: "",
+      street: "",
+      number: 0,
+    },
+  },
+  company: {
+    name: "",
+    fiscalNumber: 0,
+  },
+  items: [],
+};
 
-  const lastId =
-    initialItems.length > 0 ? initialItems[initialItems.length - 1].id : 0;
-  const [items, setItems] = useState(initialItems);
-  const [counter, setCounter] = useState(lastId + 1);
+function InvoiceApp() {
+  const [invoice, setInvoice] = useState(invoiceInitial);
+  const { id, name, client, company, total } = invoice;
+  const [items, setItems] = useState([]);
+
   const [formItemsState, setFormItemsState] = useState({
     product: "",
     price: 0,
@@ -36,7 +53,7 @@ function InvoiceApp() {
       product.trim() === "" ||
       price <= 0 ||
       isNaN(price) ||
-      quantity<= 0 ||
+      quantity <= 0 ||
       isNaN(quantity)
     ) {
       alert("Por favor, rellena todos los campos con valores válidos.");
@@ -47,10 +64,9 @@ function InvoiceApp() {
       product: product,
       price: price,
       quantity: Math.floor(quantity),
-      id: counter,
+      id: new Date().getTime(),
     };
     setItems([...items, newItem]);
-    setCounter(counter + 1);
     resetForm();
   };
 
@@ -61,6 +77,15 @@ function InvoiceApp() {
       quantityValue: 0,
     });
   };
+
+  //Hook UseEffect para el ciclo de vida
+
+  useEffect(() => {
+    const data = getInvoice();
+    setInvoice(data);
+    setItems(data.items);
+    
+  }, []); //Solo se ejecuta cuando se monta el componente la primera vez
 
   return (
     <div className="container">
