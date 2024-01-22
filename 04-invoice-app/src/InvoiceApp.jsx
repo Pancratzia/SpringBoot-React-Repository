@@ -28,28 +28,26 @@ const invoiceInitial = {
 
 function InvoiceApp() {
   const [invoice, setInvoice] = useState(invoiceInitial);
-  const [product, setProductState] = useState("");
-  const [price, setPriceState] = useState(0);
-  const [quantity, setQuantityState] = useState(0);
   const { id, name, client, company } = invoice;
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
 
+  const [itemsValues, setItemsValues] = useState([
+    { product: "", price: 0, quantity: 0, id: 0 },
+  ]);
+
+  const {product, price, quantity} = itemsValues;
+
 
   const handleInputsChange = (e) => {
-    switch (e.target.name) {
-      case "product":
-        setProductState(e.target.value);
-        break;
-      case "price":
-        setPriceState(e.target.value);
-        break;
-      case "quantity":
-        setQuantityState(e.target.value);
-        break;
-      default:
-        break;
-    }
+    
+    const { name, value } = e.target;
+
+    setItemsValues({
+      ...itemsValues,
+      [name]: value,
+    })
+
   };
 
   const handleSubmit = (e) => {
@@ -74,9 +72,11 @@ function InvoiceApp() {
     };
     setItems([...items, newItem]);
    
-    setProductState("");
-    setPriceState(0);
-    setQuantityState(0);
+    setItemsValues({
+      product: "",
+      price: 0,
+      quantity: 0,
+    })
   };
 
   //Hook UseEffect para el ciclo de vida
