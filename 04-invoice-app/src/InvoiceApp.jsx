@@ -4,7 +4,7 @@ import CompanyView from "./components/CompanyView";
 import InvoiceView from "./components/InvoiceView";
 import ListItemsView from "./components/ListItemsView";
 import TotalView from "./components/TotalView";
-import { getInvoice } from "./services/getInvoice";
+import { calculateTotal, getInvoice } from "./services/getInvoice";
 
 const invoiceInitial = {
   id: 0,
@@ -28,29 +28,35 @@ const invoiceInitial = {
 
 function InvoiceApp() {
   const [invoice, setInvoice] = useState(invoiceInitial);
-  const { id, name, client, company, total } = invoice;
+  const [product, setProductState] = useState("");
+  const [price, setPriceState] = useState(0);
+  const [quantity, setQuantityState] = useState(0);
+  const { id, name, client, company } = invoice;
   const [items, setItems] = useState([]);
+  const [total, setTotal] = useState(0);
 
-  const [formItemsState, setFormItemsState] = useState({
-    product: "",
-    price: 0,
-    quantity: 0,
-  });
 
-  const { product, price, quantity } = formItemsState;
-
-  const handleInputsChange = ({ target: { name, value } }) => {
-    setFormItemsState({
-      ...formItemsState,
-      [name]: value,
-    });
+  const handleInputsChange = (e) => {
+    switch (e.target.name) {
+      case "product":
+        setProductState(e.target.value);
+        break;
+      case "price":
+        setPriceState(e.target.value);
+        break;
+      case "quantity":
+        setQuantityState(e.target.value);
+        break;
+      default:
+        break;
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (
-      product.trim() === "" ||
+      product === "" ||
       price <= 0 ||
       isNaN(price) ||
       quantity <= 0 ||
@@ -67,15 +73,10 @@ function InvoiceApp() {
       id: new Date().getTime(),
     };
     setItems([...items, newItem]);
-    resetForm();
-  };
-
-  const resetForm = () => {
-    setFormItemsState({
-      productValue: "",
-      priceValue: 0,
-      quantityValue: 0,
-    });
+   
+    setProductState("");
+    setPriceState(0);
+    setQuantityState(0);
   };
 
   //Hook UseEffect para el ciclo de vida
@@ -84,8 +85,11 @@ function InvoiceApp() {
     const data = getInvoice();
     setInvoice(data);
     setItems(data.items);
-    
   }, []); //Solo se ejecuta cuando se monta el componente la primera vez
+
+  useEffect(() => {
+    setTotal(calculateTotal(items));
+  }, [items]);
 
   return (
     <div className="container">
@@ -125,6 +129,7 @@ function InvoiceApp() {
                 placeholder="Producto..."
                 className="form-control my-2"
                 onChange={handleInputsChange}
+                value={product}
               />
             </div>
 
@@ -136,6 +141,7 @@ function InvoiceApp() {
                 placeholder="Precio"
                 className="form-control my-2"
                 onChange={handleInputsChange}
+                value={price}
               />
             </div>
 
@@ -147,6 +153,7 @@ function InvoiceApp() {
                 placeholder="Cantidad"
                 className="form-control my-2"
                 onChange={handleInputsChange}
+                value={quantity}
               />
             </div>
 

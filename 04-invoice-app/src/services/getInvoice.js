@@ -1,9 +1,12 @@
 import { invoice } from "../data/invoice";
 
 export const getInvoice = () => {
-  const total = invoice.items
+  const total = calculateTotal(invoice.items);
+  return { ...invoice, total };
+};
+
+export const calculateTotal = (items = []) => {
+  return items
     .map((item) => item.price * item.quantity)
     .reduce((acumulador, item) => acumulador + item, 0);
-
-  return { ...invoice, total };
 };
