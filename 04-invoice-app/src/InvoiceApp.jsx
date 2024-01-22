@@ -100,7 +100,6 @@ function InvoiceApp() {
                 placeholder="Producto..."
                 className="form-control my-2"
                 onChange={handleInputsChange}
-                value={product}
               />
             </div>
 
@@ -112,7 +111,6 @@ function InvoiceApp() {
                 placeholder="Precio"
                 className="form-control my-2"
                 onChange={handleInputsChange}
-                value={price}
               />
             </div>
 
@@ -124,7 +122,6 @@ function InvoiceApp() {
                 placeholder="Cantidad"
                 className="form-control my-2"
                 onChange={handleInputsChange}
-                value={quantity}
               />
             </div>
 
