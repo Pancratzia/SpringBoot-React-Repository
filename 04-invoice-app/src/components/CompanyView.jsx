@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 
 const CompanyView = ({ company , title} ) => {
+  
   const { name: companyName, fiscalNumber } = company;
   return (
     <>

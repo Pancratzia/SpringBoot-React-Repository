@@ -5,6 +5,7 @@ import InvoiceView from "./components/InvoiceView";
 import ListItemsView from "./components/ListItemsView";
 import TotalView from "./components/TotalView";
 import { calculateTotal, getInvoice } from "./services/getInvoice";
+import FormInvoiceItemView from "./components/FormInvoiceItemView";
 
 const invoiceInitial = {
   id: 0,
@@ -32,53 +33,6 @@ function InvoiceApp() {
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const [itemsValues, setItemsValues] = useState([
-    { product: "", price: 0, quantity: 0, id: 0 },
-  ]);
-
-  const {product, price, quantity} = itemsValues;
-
-
-  const handleInputsChange = (e) => {
-    
-    const { name, value } = e.target;
-
-    setItemsValues({
-      ...itemsValues,
-      [name]: value,
-    })
-
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (
-      product === "" ||
-      price <= 0 ||
-      isNaN(price) ||
-      quantity <= 0 ||
-      isNaN(quantity)
-    ) {
-      alert("Por favor, rellena todos los campos con valores válidos.");
-      return;
-    }
-
-    const newItem = {
-      product: product,
-      price: price,
-      quantity: Math.floor(quantity),
-      id: new Date().getTime(),
-    };
-    setItems([...items, newItem]);
-   
-    setItemsValues({
-      product: "",
-      price: 0,
-      quantity: 0,
-    })
-  };
-
   //Hook UseEffect para el ciclo de vida
 
   useEffect(() => {
@@ -91,9 +45,20 @@ function InvoiceApp() {
     setTotal(calculateTotal(items));
   }, [items]);
 
+  const handleAddItems = ({ product, price, quantity}) => {
+
+    setItems([...items, 
+      { id: new Date().getTime(),
+        product: product.trim(),
+        price: price,
+        quantity: quantity
+      }]);
+  };
+
+
   return (
     <div className="container">
-      <div className="card mt-5">
+      <div className="card my-5">
         <div className="card-header">
           <h1>Tu Factura</h1>
         </div>
@@ -114,51 +79,8 @@ function InvoiceApp() {
 
           <ListItemsView title="Items" items={items} />
           <TotalView total={total} />
+          <FormInvoiceItemView handler={handleAddItems} />
 
-          <form
-            className="mt-5 w-50"
-            onSubmit={(e) => {
-              handleSubmit(e);
-            }}
-          >
-            <div className="form-group d-flex justify-content-center align-items-center gap-2">
-              <label htmlFor="product">Producto: </label>
-              <input
-                type="text"
-                name="product"
-                placeholder="Producto..."
-                className="form-control my-2"
-                onChange={handleInputsChange}
-                value={product}
-              />
-            </div>
-
-            <div className="form-group d-flex justify-content-center align-items-center gap-2">
-              <label htmlFor="price">Precio: </label>
-              <input
-                type="number"
-                name="price"
-                placeholder="Precio"
-                className="form-control my-2"
-                onChange={handleInputsChange}
-                value={price}
-              />
-            </div>
-
-            <div className="form-group d-flex justify-content-center align-items-center gap-2">
-              <label htmlFor="quantity"> Cantidad: </label>
-              <input
-                type="number"
-                name="quantity"
-                placeholder="Cantidad"
-                className="form-control my-2"
-                onChange={handleInputsChange}
-                value={quantity}
-              />
-            </div>
-
-            <button className="btn btn-primary">Añadir</button>
-          </form>
         </div>
       </div>
     </div>
