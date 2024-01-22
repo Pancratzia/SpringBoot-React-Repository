@@ -28,6 +28,8 @@ const invoiceInitial = {
 };
 
 function InvoiceApp() {
+
+  const [activeForm, setActiveForm] = useState(false);
   const [invoice, setInvoice] = useState(invoiceInitial);
   const { id, name, client, company } = invoice;
   const [items, setItems] = useState([]);
@@ -55,6 +57,10 @@ function InvoiceApp() {
       }]);
   };
 
+  const onActiveForm = () => {
+    setActiveForm(!activeForm);
+  }
+
 
   return (
     <div className="container">
@@ -79,7 +85,12 @@ function InvoiceApp() {
 
           <ListItemsView title="Items" items={items} />
           <TotalView total={total} />
-          <FormInvoiceItemView handler={handleAddItems} />
+
+
+          <button onClick={onActiveForm} className="btn btn-secondary">{!activeForm ? 'Agregar item' : 'Ocultar formulario'}</button>
+          {
+            activeForm && <FormInvoiceItemView handler={handleAddItems} />
+          }
 
         </div>
       </div>
