@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
-const CompanyView = ({ company }) => {
-  const { name: companyName, fiscalNumber, title } = company;
+const CompanyView = ({ company , title} ) => {
+  const { name: companyName, fiscalNumber } = company;
   return (
     <>
       <h3>{title}</h3>
@@ -17,4 +17,5 @@ export default CompanyView;
 
 CompanyView.propTypes = {
   company: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
 }
