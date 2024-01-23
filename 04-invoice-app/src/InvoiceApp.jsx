@@ -61,6 +61,10 @@ function InvoiceApp() {
     setActiveForm(!activeForm);
   }
 
+  const handleDeleteItem = (id) => {
+    setItems(items.filter((item) => item.id !== id));
+  }
+
 
   return (
     <div className="container">
@@ -83,7 +87,7 @@ function InvoiceApp() {
 
           <hr className="my-5" />
 
-          <ListItemsView title="Items" items={items} />
+          <ListItemsView title="Items" items={items} handleDeleteItem={id => handleDeleteItem(id)} />
           <TotalView total={total} />
 
 
