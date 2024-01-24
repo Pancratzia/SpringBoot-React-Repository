@@ -1,7 +1,7 @@
 import { products } from "../data/products"
 
-export const getProductos = () =>{
+export const getProducts = () =>{
 
     return products;
-    
+
 }
