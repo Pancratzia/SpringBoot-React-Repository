@@ -4,7 +4,7 @@ function CartApp() {
 
   return (
     <>
-      Hola Mundo
+      <h3>Cart App</h3>
     </>
   )
 }
