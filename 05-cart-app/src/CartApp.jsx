@@ -1,37 +1,14 @@
-import { useEffect, useState } from "react";
-import { getProducts } from "./services/productsService";
+import CartView from "./components/CartView";
+
 
 function CartApp() {
-
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const data = getProducts();
-    setProducts(data);
-  })
 
   return (
     <>
       <div className="container my-5">
         <h3>Cart App</h3>
 
-        <div className="row">
-
-          {products.length > 0 && products.map((product) => (
-            <div className="col-4 my-2" key={product.id}>
-            <div className="card">
-              <div className="card-body">
-                <h5 className="cart-title">{product.name}</h5>
-                <p className="card-text">{product.description}</p>
-                <p className="card-text">{product.price}$</p>
-
-                <button className="btn btn-primary">Comprar</button>
-              </div>
-            </div>
-          </div>
-          ))}
-          
-        </div>
+        <CartView />
 
         <div className="my-4 w-75">
 
