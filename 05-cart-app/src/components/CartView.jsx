@@ -6,13 +6,10 @@ const CartView = ({ items, handler }) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    setTotal(
-      calculateTotal(items)
-    );
+    setTotal(calculateTotal(items));
   }, [items]);
 
   const onDeleteProduct = (id) => {
-    console.log("Eliminando producto...");
     handler(id);
   };
 
@@ -40,7 +37,7 @@ const CartView = ({ items, handler }) => {
                 <td>
                   <button
                     className="btn btn-danger"
-                    onClick={(id) => onDeleteProduct(id)}
+                    onClick={() => onDeleteProduct(item.product.id)}
                   >
                     Eliminar
                   </button>

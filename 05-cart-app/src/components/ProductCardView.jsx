@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const ProductCardVie = ({ id, name, description, price, handler }) => {
   const onAddProduct = (product) => {
-    console.log(product);
+    
     handler(product);
   };
 
