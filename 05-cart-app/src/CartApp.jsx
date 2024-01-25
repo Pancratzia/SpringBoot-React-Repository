@@ -55,7 +55,11 @@ function CartApp() {
         <CatalogView handler={(product) => handlerAddProductCart(product)} />
 
         <div className="my-4 w-75">
-          <CartView handler ={handlerDeleteProducts} items={cartItems} />
+
+          {
+            cartItems.length > 0 ? <CartView handler ={handlerDeleteProducts} items={cartItems} /> : <p>No hay elementos en el carrito</p>
+          }
+          
         </div>
       </div>
     </>
