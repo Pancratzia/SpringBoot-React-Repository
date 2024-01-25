@@ -6,6 +6,7 @@ const CartView = ({ items, handler }) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
+    sessionStorage.setItem("cart", JSON.stringify(items));
     setTotal(calculateTotal(items));
   }, [items]);
 
@@ -51,7 +52,7 @@ const CartView = ({ items, handler }) => {
               Total
             </td>
             <td colSpan={2} className="fw-bold">
-              {total}$
+              {total.toFixed(2)}$
             </td>
           </tr>
         </tfoot>
