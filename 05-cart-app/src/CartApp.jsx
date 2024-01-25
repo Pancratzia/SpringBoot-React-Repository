@@ -1,4 +1,4 @@
-import CartView from "./components/CartView";
+import CatalogView from "./components/CatalogView";
 
 
 function CartApp() {
@@ -8,7 +8,7 @@ function CartApp() {
       <div className="container my-5">
         <h3>Cart App</h3>
 
-        <CartView />
+        <CatalogView />
 
         <div className="my-4 w-75">
 
