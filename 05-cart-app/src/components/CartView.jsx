@@ -1,11 +1,20 @@
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { calculateTotal } from "../services/productsService";
 
 const CartView = ({ items, handler }) => {
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    setTotal(
+      calculateTotal(items)
+    );
+  }, [items]);
 
   const onDeleteProduct = (id) => {
     console.log("Eliminando producto...");
     handler(id);
-  }
+  };
 
   return (
     <>
@@ -29,7 +38,12 @@ const CartView = ({ items, handler }) => {
                 <td>{item.quantity}</td>
                 <td>{item.quantity * item.product.price}$</td>
                 <td>
-                  <button className="btn btn-danger" onClick={(id) => onDeleteProduct(id)}>Eliminar</button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={(id) => onDeleteProduct(id)}
+                  >
+                    Eliminar
+                  </button>
                 </td>
               </tr>
             ))}
@@ -40,7 +54,7 @@ const CartView = ({ items, handler }) => {
               Total
             </td>
             <td colSpan={2} className="fw-bold">
-              0$
+              {total}$
             </td>
           </tr>
         </tfoot>
@@ -53,5 +67,5 @@ export default CartView;
 
 CartView.propTypes = {
   items: PropTypes.array.isRequired,
-  handler: PropTypes.func.isRequired
-}
+  handler: PropTypes.func.isRequired,
+};
