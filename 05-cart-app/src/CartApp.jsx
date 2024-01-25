@@ -2,6 +2,7 @@ import { useEffect, useReducer } from "react";
 import CartView from "./components/CartView";
 import CatalogView from "./components/CatalogView";
 import { itemsReducer } from "./reducer/itemsReducer";
+import { ADD_ITEM, DELETE_ITEM, UPDATE_ITEM } from "./reducer/itemsActions";
 
 const initialCartItems = JSON.parse(sessionStorage.getItem("cart")) || [];
 
@@ -17,14 +18,14 @@ function CartApp() {
 
     if (hasItem) {
       dispatch({
-        type: "UPDATE_ITEM",
+        type: UPDATE_ITEM,
         payload: {
           id: product.id,
         },
       });
     } else {
       dispatch({
-        type: "ADD_ITEM",
+        type: ADD_ITEM,
         payload: product,
       });
     }
@@ -32,7 +33,7 @@ function CartApp() {
 
   const handlerDeleteProducts = (id) => {
     dispatch({
-      type: "DELETE_ITEM",
+      type: DELETE_ITEM,
       payload: {
         id,
       },
