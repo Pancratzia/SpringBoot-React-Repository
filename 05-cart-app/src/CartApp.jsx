@@ -43,6 +43,10 @@ function CartApp() {
     }
   };
 
+  const handlerDeleteProducts = (id) => {
+    setCartItems(cartItems.filter((item) => item.product.id !== id));
+  }
+
   return (
     <>
       <div className="container my-5">
@@ -51,7 +55,7 @@ function CartApp() {
         <CatalogView handler={(product) => handlerAddProductCart(product)} />
 
         <div className="my-4 w-75">
-          <CartView items={cartItems} />
+          <CartView handler ={handlerDeleteProducts} items={cartItems} />
         </div>
       </div>
     </>
