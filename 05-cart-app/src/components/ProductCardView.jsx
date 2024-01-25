@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const CatalogItem = ({ name, description, price }) => {
+const ProductCardVie = ({ name, description, price }) => {
   return (
     <div className="card">
       <div className="card-body">
@@ -14,9 +14,9 @@ const CatalogItem = ({ name, description, price }) => {
   );
 };
 
-export default CatalogItem;
+export default ProductCardVie;
 
-CatalogItem.propTypes = {
+ProductCardVie.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
