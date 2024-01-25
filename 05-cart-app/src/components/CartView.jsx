@@ -1,4 +1,6 @@
-const CartView = () => {
+import PropTypes from "prop-types";
+
+const CartView = ({ items }) => {
   return (
     <>
       <h4>Carrito de Compras</h4>
@@ -13,13 +15,16 @@ const CartView = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Nombre</td>
-            <td>0$</td>
-            <td>1</td>
-            <td>0$</td>
-            <td>Eliminar</td>
-          </tr>
+          {items &&
+            items.map((item) => (
+              <tr key={item.product.id}>
+                <td>{item.product.name}</td>
+                <td>{item.product.price}$</td>
+                <td>{item.quantity}</td>
+                <td>{item.quantity * item.product.price}$</td>
+                <td>Eliminar</td>
+              </tr>
+            ))}
         </tbody>
         <tfoot>
           <tr>
@@ -37,3 +42,7 @@ const CartView = () => {
 };
 
 export default CartView;
+
+CartView.propTypes = {
+  items: PropTypes.array.isRequired
+}
