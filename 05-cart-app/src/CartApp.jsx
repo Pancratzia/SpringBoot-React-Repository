@@ -11,13 +11,26 @@ function CartApp() {
     const hasItem = cartItems.find((item) => item.product.id === product.id);
 
     if (hasItem) {
-      setCartItems([
+      setCartItems(
+        cartItems.map((item) => {
+          if (item.product.id === product.id) {
+            return {
+              ...item,
+              quantity: item.quantity + 1,
+              price: item.product.price * (item.quantity + 1),
+            };
+          }
+          return item;
+        })
+      )
+
+      /*setCartItems([
         ...cartItems.filter((item) => item.product.id !== product.id),
         {
           product,
           quantity: hasItem.quantity + 1,
         },
-      ]);
+      ]);*/
     } else {
       setCartItems([
         ...cartItems,
