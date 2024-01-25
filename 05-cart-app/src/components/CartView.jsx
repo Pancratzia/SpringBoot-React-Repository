@@ -11,6 +11,10 @@ const CartView = ({ items, handler }) => {
   }, [items]);
 
   const onDeleteProduct = (id) => {
+    sessionStorage.setItem(
+      "cart",
+      JSON.stringify(items.filter((item) => item.product.id !== id))
+    );
     handler(id);
   };
 
