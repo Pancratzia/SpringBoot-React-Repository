@@ -1,6 +1,11 @@
 import PropTypes from "prop-types";
 
-const ProductCardVie = ({ name, description, price }) => {
+const ProductCardVie = ({ id, name, description, price, handler }) => {
+  const onAddProduct = (product) => {
+    console.log(product);
+    handler(product);
+  };
+
   return (
     <div className="card">
       <div className="card-body">
@@ -8,7 +13,12 @@ const ProductCardVie = ({ name, description, price }) => {
         <p className="card-text">{description}</p>
         <p className="card-text">{price}$</p>
 
-        <button className="btn btn-primary">Comprar</button>
+        <button
+          className="btn btn-primary"
+          onClick={() => onAddProduct({ id, name, description, price })}
+        >
+          Comprar
+        </button>
       </div>
     </div>
   );
@@ -17,7 +27,9 @@ const ProductCardVie = ({ name, description, price }) => {
 export default ProductCardVie;
 
 ProductCardVie.propTypes = {
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-}
+  handler: PropTypes.func.isRequired
+};

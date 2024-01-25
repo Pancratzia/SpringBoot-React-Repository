@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getProducts } from "../services/productsService";
+import PropTypes from "prop-types";
 import ProductCardVie from "./ProductCardView";
 
-const CatalogView = () => {
+const CatalogView = ({ handler }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -16,6 +17,8 @@ const CatalogView = () => {
         products.map((product) => (
           <div className="col-4 my-2" key={product.id}>
             <ProductCardVie
+              handler = { handler }
+              id={product.id}
               name={product.name}
               description={product.description}
               price={product.price}
@@ -27,3 +30,7 @@ const CatalogView = () => {
 };
 
 export default CatalogView;
+
+CatalogView.propTypes = {
+  handler: PropTypes.func.isRequired
+}
