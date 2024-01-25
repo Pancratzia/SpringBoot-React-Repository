@@ -6,15 +6,10 @@ const CartView = ({ items, handler }) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    sessionStorage.setItem("cart", JSON.stringify(items));
     setTotal(calculateTotal(items));
   }, [items]);
 
   const onDeleteProduct = (id) => {
-    sessionStorage.setItem(
-      "cart",
-      JSON.stringify(items.filter((item) => item.product.id !== id))
-    );
     handler(id);
   };
 

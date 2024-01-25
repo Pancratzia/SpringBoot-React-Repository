@@ -14,7 +14,6 @@ export const itemsReducer = (state = [], action) => {
           return {
             ...item,
             quantity: item.quantity + 1,
-            price: item.product.price * (item.quantity + 1),
           };
         }
         return item;
