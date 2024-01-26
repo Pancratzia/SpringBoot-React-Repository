@@ -1,44 +1,14 @@
-import { useEffect, useReducer } from "react";
+
 import CartView from "./components/CartView";
 import CatalogView from "./components/CatalogView";
-import { itemsReducer } from "./reducer/itemsReducer";
-import { ADD_ITEM, DELETE_ITEM, UPDATE_ITEM } from "./reducer/itemsActions";
+import { useItemsCart } from "./hooks/useItemsCart";
 
-const initialCartItems = JSON.parse(sessionStorage.getItem("cart")) || [];
+
 
 function CartApp() {
-  const [cartItems, dispatch] = useReducer(itemsReducer, initialCartItems);
 
-  useEffect(() => {
-    sessionStorage.setItem("cart", JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const handlerAddProductCart = (product) => {
-    const hasItem = cartItems.find((item) => item.product.id === product.id);
-
-    if (hasItem) {
-      dispatch({
-        type: UPDATE_ITEM,
-        payload: {
-          id: product.id,
-        },
-      });
-    } else {
-      dispatch({
-        type: ADD_ITEM,
-        payload: product,
-      });
-    }
-  };
-
-  const handlerDeleteProducts = (id) => {
-    dispatch({
-      type: DELETE_ITEM,
-      payload: {
-        id,
-      },
-    });
-  }
+  const { cartItems, handlerAddProductCart, handlerDeleteProducts } = useItemsCart();
+  
 
   return (
     <>
