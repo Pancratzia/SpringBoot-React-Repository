@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 
 const ProductCardVie = ({ id, name, description, price, handler }) => {
   const onAddProduct = (product) => {
-    
     handler(product);
   };
 
@@ -11,7 +10,7 @@ const ProductCardVie = ({ id, name, description, price, handler }) => {
       <div className="card-body">
         <h5 className="cart-title">{name}</h5>
         <p className="card-text">{description}</p>
-        <p className="card-text">{price}$</p>
+        <p className="card-text">{price.toFixed(2)}$</p>
 
         <button
           className="btn btn-primary"
@@ -31,5 +30,5 @@ ProductCardVie.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  handler: PropTypes.func.isRequired
+  handler: PropTypes.func.isRequired,
 };

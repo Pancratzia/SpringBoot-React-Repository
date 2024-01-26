@@ -31,9 +31,9 @@ const CartView = ({ items, handler }) => {
             items.map((item) => (
               <tr key={item.product.id}>
                 <td>{item.product.name}</td>
-                <td>{item.product.price}$</td>
+                <td>{item.product.price.toFixed(2)}$</td>
                 <td>{item.quantity}</td>
-                <td>{item.quantity * item.product.price}$</td>
+                <td>{(item.quantity * item.product.price).toFixed(2)}$</td>
                 <td>
                   <button
                     className="btn btn-danger"
