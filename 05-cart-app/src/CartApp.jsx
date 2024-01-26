@@ -24,11 +24,14 @@ function CartApp() {
           <Route
             path="/cart"
             element={
-              cartItems.length > 0 && (
+              cartItems.length > 0 ? (
                 <div className="my-4 w-75">
                   <CartView handler={handlerDeleteProducts} items={cartItems} />
                 </div>
-              )
+              ) :
+              <div className="alert alert-warning">
+                No hay elementos en el carrito
+              </div>
             }
           />
 
