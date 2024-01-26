@@ -1,29 +1,39 @@
-
+import { Navigate, Route, Routes } from "react-router-dom";
 import CartView from "./components/CartView";
 import CatalogView from "./components/CatalogView";
 import { useItemsCart } from "./hooks/useItemsCart";
 
-
-
 function CartApp() {
-
-  const { cartItems, handlerAddProductCart, handlerDeleteProducts } = useItemsCart();
-  
+  const { cartItems, handlerAddProductCart, handlerDeleteProducts } =
+    useItemsCart();
 
   return (
     <>
       <div className="container my-5">
         <h3>Cart App</h3>
 
-        <CatalogView handler={(product) => handlerAddProductCart(product)} />
+        <Routes>
+          <Route
+            path="/catalog"
+            element={
+              <CatalogView
+                handler={(product) => handlerAddProductCart(product)}
+              />
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              cartItems.length > 0 && (
+                <div className="my-4 w-75">
+                  <CartView handler={handlerDeleteProducts} items={cartItems} />
+                </div>
+              )
+            }
+          />
 
-        <div className="my-4 w-75">
-
-          {
-            cartItems.length > 0 ? <CartView handler ={handlerDeleteProducts} items={cartItems} /> : <p>No hay elementos en el carrito</p>
-          }
-          
-        </div>
+          <Route path="/" element={<Navigate to="/catalog" />} />
+        </Routes>
       </div>
     </>
   );
