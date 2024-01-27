@@ -1,7 +1,15 @@
-import UserForm from "./components/UserForm"
-import UsersList from "./components/UsersList"
+import UserForm from "./components/UserForm";
+import UsersList from "./components/UsersList";
 
 function App() {
+  const initialUsers = [
+    {
+      id: 1,
+      username: "Pancratzia",
+      password: "123",
+      email: "lala@correo.com",
+    },
+  ];
 
   return (
     <>
@@ -9,15 +17,15 @@ function App() {
         <h2>Users App</h2>
         <div className="row my-4">
           <div className="col-6">
-            <UsersList />
+            <UserForm />
           </div>
           <div className="col-6">
-            <UserForm />
+            <UsersList users={initialUsers} />
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
