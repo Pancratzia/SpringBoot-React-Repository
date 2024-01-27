@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 const initialUserform = {
-  username: "test",
-  password: "pass",
-  email: "a@a.a",
+  username: "",
+  password: "",
+  email: "",
 };
 
 const UserForm = () => {
