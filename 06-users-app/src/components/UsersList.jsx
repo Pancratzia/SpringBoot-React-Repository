@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import UserRow from "./UserRow";
 
 const UsersList = ({ users = [] }) => {
   return (
@@ -14,19 +15,7 @@ const UsersList = ({ users = [] }) => {
       </thead>
       <tbody>
         {users.map((user) => {
-          return (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>
-                <button className="btn btn-secondary">Update</button>
-              </td>
-              <td>
-                <button className="btn btn-danger">Delete</button>
-              </td>
-            </tr>
-          );
+          return <UserRow key={user.id} user={user} />;
         })}
       </tbody>
     </table>
