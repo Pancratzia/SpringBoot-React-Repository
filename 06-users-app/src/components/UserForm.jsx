@@ -15,8 +15,23 @@ const UserForm = () => {
     setUserForm({ ...userForm, [name]: value });
   };
 
+  const onSubmit = (event) => {
+    event.preventDefault();
+    
+    if(
+      username.trim() === "" ||
+      password.trim() === "" ||
+      email.trim() === ""
+    ) {
+      alert("Please fill all the fields");
+      return;
+    }
+
+    setUserForm(initialUserform);
+  }
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <input
         className="form-control my-3 w-75"
         type="text"
