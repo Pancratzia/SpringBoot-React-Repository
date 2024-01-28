@@ -21,7 +21,7 @@ function App() {
             <UserForm handlerAddUser={handlerAddUser} />
           </div>{" "}
           <div className="col-6">
-            {users.length > 0 && <UsersList users={users} />}
+            <UsersList users={users} />
           </div>
         </div>
       </div>
