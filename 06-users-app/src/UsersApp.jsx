@@ -12,6 +12,10 @@ function App() {
     dispatch({ type: "ADD_USER", payload: user });
   };
 
+  const handlerRemoveUser = (id) => {
+    dispatch({ type: "REMOVE_USER", payload: id });
+  }
+
   return (
     <>
       <div className="container my-4">
@@ -21,7 +25,7 @@ function App() {
             <UserForm handlerAddUser={handlerAddUser} />
           </div>{" "}
           <div className="col-6">
-            <UsersList users={users} />
+            <UsersList users={users} handlerRemoveUser={handlerRemoveUser} />
           </div>
         </div>
       </div>

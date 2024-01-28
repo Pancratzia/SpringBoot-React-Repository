@@ -16,6 +16,9 @@ export const usersReducer = (state = [], action) => {
           id,
         },
       ];
+    
+    case "REMOVE_USER":
+      return state.filter((user) => user.id !== action.payload);
     default:
       return state;
   }

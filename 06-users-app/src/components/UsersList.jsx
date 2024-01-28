@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import UserRow from "./UserRow";
 
-const UsersList = ({ users = [] }) => {
+const UsersList = ({ users = [], handlerRemoveUser }) => {
   return (
     <>
       {users.length === 0 ? (
@@ -19,7 +19,7 @@ const UsersList = ({ users = [] }) => {
           </thead>
           <tbody>
             {users.map((user) => {
-              return <UserRow key={user.id} user={user} />;
+              return <UserRow key={user.id} user={user} handlerRemoveUser={handlerRemoveUser} />;
             })}
           </tbody>
         </table>
@@ -32,4 +32,5 @@ export default UsersList;
 
 UsersList.propTypes = {
   users: PropTypes.array,
+  handlerRemoveUser: PropTypes.func,
 };
