@@ -1,13 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-const initialUserform = {
-  username: "",
-  password: "",
-  email: "",
-};
-
-const UserForm = ( { handlerAddUser }) => {
+const UserForm = ( { handlerAddUser, initialUserform }) => {
   const [userForm, setUserForm] = useState(initialUserform);
 
   const { username, password, email } = userForm;
@@ -76,4 +70,5 @@ export default UserForm;
 
 UserForm.propTypes = {
   handlerAddUser: PropTypes.func.isRequired,
+  initialUserform: PropTypes.object.isRequired,
 }

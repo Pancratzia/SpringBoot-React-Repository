@@ -5,6 +5,12 @@ import { usersReducer } from "./reducers/usersReducer";
 
 const initialUsers = [];
 
+const initialUserform = {
+  username: "",
+  password: "",
+  email: "",
+};
+
 function App() {
   const [users, dispatch] = useReducer(usersReducer, initialUsers);
 
@@ -22,8 +28,8 @@ function App() {
         <h2>Users App</h2>
         <div className="row my-4">
           <div className="col-6">
-            <UserForm handlerAddUser={handlerAddUser} />
-          </div>{" "}
+            <UserForm handlerAddUser={handlerAddUser} initialUserform={initialUserform} />
+          </div>
           <div className="col-6">
             <UsersList users={users} handlerRemoveUser={handlerRemoveUser} />
           </div>

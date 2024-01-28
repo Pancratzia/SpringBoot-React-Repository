@@ -5,7 +5,7 @@ const UsersList = ({ users = [], handlerRemoveUser }) => {
   return (
     <>
       {users.length === 0 ? (
-        <p>There are no users registered at this moment</p>
+        <p className="text-center alert alert-warning">There are no users registered at this moment</p>
       ) : (
         <table className="table table-striped table-hover">
           <thead>
