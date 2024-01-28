@@ -1,3 +1,5 @@
+import { generateRandomId } from "../helpers/userHelpers";
+
 export const usersReducer = (state = [], action) =>{
 
     switch(action.type){
@@ -6,7 +8,7 @@ export const usersReducer = (state = [], action) =>{
                 ...state,
                 {
                     ...action.payload,
-                    id: new Date().getTime(),
+                    id: generateRandomId(),
                 }
             ];
         default:
