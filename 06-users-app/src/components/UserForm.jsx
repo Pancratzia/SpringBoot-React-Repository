@@ -7,7 +7,7 @@ const UserForm = ({ handlerAddUser, initialUserform, userSelected }) => {
   const { username, password, email, id } = userForm;
 
   useEffect(() => {
-    setUserForm({ ...userSelected });
+    setUserForm({ ...userSelected, password: "" });
   }, [userSelected]);
 
   const onInputChange = ({ target: { name, value } }) => {
