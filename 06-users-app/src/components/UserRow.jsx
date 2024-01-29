@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 
-const UserRow = ({ user, handlerRemoveUser }) => {
-  const { id, username, email } = user;
-
-  const onRemoveUser = (id) => {
-    handlerRemoveUser(id);  
-  }
+const UserRow = ({ user, handlerRemoveUser, handlerUserSelectedForm }) => {
+  const { id, username, email, password } = user;
 
   return (
     <tr>
@@ -13,10 +9,27 @@ const UserRow = ({ user, handlerRemoveUser }) => {
       <td>{username}</td>
       <td>{email}</td>
       <td>
-        <button className="btn btn-secondary">Update</button>
+        <button
+          className="btn btn-secondary"
+          onClick={() =>
+            handlerUserSelectedForm({
+              id,
+              username,
+              email,
+              password,
+            })
+          }
+        >
+          Update
+        </button>
       </td>
       <td>
-        <button onClick={() =>  onRemoveUser(id)} className="btn btn-danger">Delete</button>
+        <button
+          onClick={() => handlerRemoveUser(id)}
+          className="btn btn-danger"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   );
@@ -27,4 +40,5 @@ export default UserRow;
 UserRow.propTypes = {
   user: PropTypes.object,
   handlerRemoveUser: PropTypes.func,
+  handlerUserSelectedForm: PropTypes.func,
 };

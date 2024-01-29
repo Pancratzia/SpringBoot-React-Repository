@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-const UserForm = ( { handlerAddUser, initialUserform }) => {
+const UserForm = ( { handlerAddUser, initialUserform, userSelected }) => {
   const [userForm, setUserForm] = useState(initialUserform);
 
   const { username, password, email } = userForm;
+
+  useEffect(() => {
+    setUserForm({ ...userSelected });
+  }, [userSelected]);
 
   const onInputChange = ({ target: { name, value } }) => {
     setUserForm({ ...userForm, [name]: value });
@@ -71,4 +75,5 @@ export default UserForm;
 UserForm.propTypes = {
   handlerAddUser: PropTypes.func.isRequired,
   initialUserform: PropTypes.object.isRequired,
+  userSelected: PropTypes.object
 }

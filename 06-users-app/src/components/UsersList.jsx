@@ -1,11 +1,17 @@
 import PropTypes from "prop-types";
 import UserRow from "./UserRow";
 
-const UsersList = ({ users = [], handlerRemoveUser }) => {
+const UsersList = ({
+  users = [],
+  handlerRemoveUser,
+  handlerUserSelectedForm,
+}) => {
   return (
     <>
       {users.length === 0 ? (
-        <p className="text-center alert alert-warning">There are no users registered at this moment</p>
+        <p className="text-center alert alert-warning">
+          There are no users registered at this moment
+        </p>
       ) : (
         <table className="table table-striped table-hover">
           <thead>
@@ -19,7 +25,14 @@ const UsersList = ({ users = [], handlerRemoveUser }) => {
           </thead>
           <tbody>
             {users.map((user) => {
-              return <UserRow key={user.id} user={user} handlerRemoveUser={handlerRemoveUser} />;
+              return (
+                <UserRow
+                  key={user.id}
+                  user={user}
+                  handlerRemoveUser={handlerRemoveUser}
+                  handlerUserSelectedForm={handlerUserSelectedForm}
+                />
+              );
             })}
           </tbody>
         </table>
@@ -33,4 +46,5 @@ export default UsersList;
 UsersList.propTypes = {
   users: PropTypes.array,
   handlerRemoveUser: PropTypes.func,
+  handlerUserSelectedForm: PropTypes.func,
 };
