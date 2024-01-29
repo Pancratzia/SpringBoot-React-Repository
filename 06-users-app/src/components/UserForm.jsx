@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 
-const UserForm = ({ handlerAddUser, initialUserform, userSelected, handlerCloseForm }) => {
+const UserForm = ({
+  handlerAddUser,
+  initialUserform,
+  userSelected,
+  handlerCloseForm,
+}) => {
   const [userForm, setUserForm] = useState(initialUserform);
 
   const { username, password, email, id } = userForm;
@@ -35,23 +40,26 @@ const UserForm = ({ handlerAddUser, initialUserform, userSelected, handlerCloseF
   const onCloseForm = () => {
     handlerCloseForm();
     setUserForm(initialUserform);
-  }
+  };
 
   return (
     <form onSubmit={onSubmit}>
-      <input
-        className="form-control my-3 w-75"
-        type="text"
-        placeholder="Username"
-        name="username"
-        onChange={onInputChange}
-        value={username}
-        required
-      />
+      <div className="form-field">
+        <input
+          className="form-control my-3 "
+          type="text"
+          placeholder="Username"
+          name="username"
+          onChange={onInputChange}
+          value={username}
+          id="username"
+          required
+        />
+      </div>
 
       {id === 0 && (
         <input
-          className="form-control my-3 w-75"
+          className="form-control my-3"
           type="password"
           placeholder="Password"
           name="password"
@@ -62,7 +70,7 @@ const UserForm = ({ handlerAddUser, initialUserform, userSelected, handlerCloseF
       )}
 
       <input
-        className="form-control my-3 w-75"
+        className="form-control my-3"
         type="email"
         placeholder="Email"
         name="email"
@@ -76,7 +84,13 @@ const UserForm = ({ handlerAddUser, initialUserform, userSelected, handlerCloseF
       <button className="btn btn-primary" type="submit">
         {userSelected.id !== 0 ? "Update" : "Save"}
       </button>
-      <button onClick={onCloseForm} type="button" className="btn btn-secondary mx-2">Cerrar</button>
+      <button
+        onClick={onCloseForm}
+        type="button"
+        className="btn btn-secondary mx-2"
+      >
+        Cerrar
+      </button>
     </form>
   );
 };
