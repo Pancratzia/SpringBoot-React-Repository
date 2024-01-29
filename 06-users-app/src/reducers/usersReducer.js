@@ -1,4 +1,4 @@
-import { generateRandomId } from "../helpers/userHelpers";
+import { generateRandomId } from "../helpers/userHelper";
 
 export const usersReducer = (state = [], action) => {
 
