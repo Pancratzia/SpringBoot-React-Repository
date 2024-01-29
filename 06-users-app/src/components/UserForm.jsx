@@ -20,7 +20,8 @@ const UserForm = ({ handlerAddUser, initialUserform, userSelected }) => {
 
     if (
       username.trim() === "" ||
-      email.trim() === "" || (id === 0 && password.trim() === "")
+      email.trim() === "" ||
+      (id === 0 && password.trim() === "")
     ) {
       Swal.fire("Error", "All fields are required", "error");
       return;
@@ -70,6 +71,7 @@ const UserForm = ({ handlerAddUser, initialUserform, userSelected }) => {
       <button className="btn btn-primary" type="submit">
         {userSelected.id !== 0 ? "Update" : "Save"}
       </button>
+      <button type="button" className="btn btn-secondary mx-2">Cerrar</button>
     </form>
   );
 };

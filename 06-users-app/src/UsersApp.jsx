@@ -19,6 +19,9 @@ function App() {
             />
           </div>
           <div className="col-6">
+            <button className="btn btn-primary my-2">
+              Nuevo Usuario
+            </button>
             <UsersList
               users={users}
               handlerRemoveUser={handlerRemoveUser}

@@ -14,6 +14,7 @@ const initialUserForm = {
 export const useUsers = () => {
   const [users, dispatch] = useReducer(usersReducer, initialUsers);
   const [userSelected, setUserSelected] = useState(initialUserForm);
+  const [visibleForm, setVisibleForm] = useState(false);
 
   const handlerAddUser = (user) => {
     dispatch({
@@ -28,6 +29,7 @@ export const useUsers = () => {
         : "User updated successfully";
 
     Swal.fire("Success", message, "success");
+    setVisibleForm(false);
   };
 
   const handlerRemoveUser = (id) => {
@@ -48,6 +50,7 @@ export const useUsers = () => {
   };
 
   const handlerUserSelectedForm = (user) => {
+    setVisibleForm(true);
     setUserSelected({ ...user });
   };
 
@@ -58,5 +61,6 @@ export const useUsers = () => {
     handlerAddUser,
     handlerRemoveUser,
     handlerUserSelectedForm,
+    visibleForm,
   };
 };
