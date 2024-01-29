@@ -19,7 +19,11 @@ function App() {
     <>
       {visibleForm && (
         <div className="abrir-modal animacion fadeIn">
-          <div className="modal" style={{ display: visibleForm ? "block" : "" }} tabIndex={-1}>
+          <div
+            className="modal"
+            style={{ display: visibleForm ? "block" : "" }}
+            tabIndex={-1}
+          >
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
@@ -45,14 +49,10 @@ function App() {
         <h2>Users App</h2>
         <div className="row my-4">
           <div className="col">
-            {!visibleForm && (
-              <button
-                onClick={handlerOpenForm}
-                className="btn btn-primary my-2"
-              >
-                Nuevo Usuario
-              </button>
-            )}
+            <button onClick={handlerOpenForm} className="btn btn-primary my-2">
+              Nuevo Usuario
+            </button>
+
             <UsersList
               users={users}
               handlerRemoveUser={handlerRemoveUser}
