@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
 
 const UserForm = ({ handlerAddUser, initialUserform, userSelected }) => {
   const [userForm, setUserForm] = useState(initialUserform);
@@ -21,7 +22,7 @@ const UserForm = ({ handlerAddUser, initialUserform, userSelected }) => {
       username.trim() === "" ||
       email.trim() === "" || (id === 0 && password.trim() === "")
     ) {
-      alert("Please fill all the fields");
+      Swal.fire("Error", "All fields are required", "error");
       return;
     }
 
