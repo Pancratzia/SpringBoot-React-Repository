@@ -53,6 +53,15 @@ export const useUsers = () => {
     setVisibleForm(true);
     setUserSelected({ ...user });
   };
+  
+  const handlerOpenForm = () => {
+    setVisibleForm(true);
+  }
+
+  const handlerCloseForm = () => {
+    setVisibleForm(false);
+    setUserSelected(initialUserForm);
+  }
 
   return {
     users,
@@ -62,5 +71,7 @@ export const useUsers = () => {
     handlerRemoveUser,
     handlerUserSelectedForm,
     visibleForm,
+    handlerOpenForm,
+    handlerCloseForm
   };
 };
