@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const UserRow = ({ user, handlerRemoveUser, handlerUserSelectedForm }) => {
-  const { id, username, email, password } = user;
+  const { id, username, email } = user;
 
   return (
     <tr>
@@ -15,8 +15,7 @@ const UserRow = ({ user, handlerRemoveUser, handlerUserSelectedForm }) => {
             handlerUserSelectedForm({
               id,
               username,
-              email,
-              password,
+              email
             })
           }
         >

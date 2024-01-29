@@ -19,8 +19,7 @@ const UserForm = ({ handlerAddUser, initialUserform, userSelected }) => {
 
     if (
       username.trim() === "" ||
-      password.trim() === "" ||
-      email.trim() === ""
+      email.trim() === "" || (id === 0 && password.trim() === "")
     ) {
       alert("Please fill all the fields");
       return;
@@ -43,15 +42,17 @@ const UserForm = ({ handlerAddUser, initialUserform, userSelected }) => {
         required
       />
 
-      <input
-        className="form-control my-3 w-75"
-        type="password"
-        placeholder="Password"
-        name="password"
-        onChange={onInputChange}
-        value={password}
-        required
-      />
+      {id === 0 && (
+        <input
+          className="form-control my-3 w-75"
+          type="password"
+          placeholder="Password"
+          name="password"
+          onChange={onInputChange}
+          value={password}
+          required
+        />
+      )}
 
       <input
         className="form-control my-3 w-75"
