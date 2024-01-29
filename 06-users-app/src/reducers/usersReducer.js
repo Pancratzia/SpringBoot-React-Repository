@@ -19,6 +19,16 @@ export const usersReducer = (state = [], action) => {
     
     case "REMOVE_USER":
       return state.filter((user) => user.id !== action.payload);
+
+    case "UPDATE_USER":
+      return state.map((user) => {
+        if (user.id === action.payload.id) {
+          return {
+            ...action.payload
+          };
+        }
+        return user;
+      })
     default:
       return state;
   }

@@ -6,6 +6,7 @@ import { usersReducer } from "./reducers/usersReducer";
 const initialUsers = [];
 
 const initialUserForm = {
+  id: 0,
   username: "",
   password: "",
   email: "",
@@ -16,7 +17,17 @@ function App() {
   const [userSelected, setUserSelected] = useState(initialUserForm);
 
   const handlerAddUser = (user) => {
-    dispatch({ type: "ADD_USER", payload: user });
+
+    let type;
+
+    if (userSelected.id !== 0) {
+      type = "UPDATE_USER";
+    } else {
+      type = "ADD_USER";
+    }
+
+    dispatch({ type, payload: user });
+    setUserSelected(initialUserForm);
   };
 
   const handlerRemoveUser = (id) => {

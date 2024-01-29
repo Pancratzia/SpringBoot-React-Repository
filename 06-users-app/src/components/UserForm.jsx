@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-const UserForm = ( { handlerAddUser, initialUserform, userSelected }) => {
+const UserForm = ({ handlerAddUser, initialUserform, userSelected }) => {
   const [userForm, setUserForm] = useState(initialUserform);
 
-  const { username, password, email } = userForm;
+  const { username, password, email, id } = userForm;
 
   useEffect(() => {
     setUserForm({ ...userSelected });
@@ -16,8 +16,8 @@ const UserForm = ( { handlerAddUser, initialUserform, userSelected }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    
-    if(
+
+    if (
       username.trim() === "" ||
       password.trim() === "" ||
       email.trim() === ""
@@ -29,7 +29,7 @@ const UserForm = ( { handlerAddUser, initialUserform, userSelected }) => {
     handlerAddUser(userForm);
 
     setUserForm(initialUserform);
-  }
+  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -63,6 +63,8 @@ const UserForm = ( { handlerAddUser, initialUserform, userSelected }) => {
         required
       />
 
+      <input type="hidden" name="id" value={id} />
+
       <button className="btn btn-primary" type="submit">
         Crear
       </button>
@@ -75,5 +77,5 @@ export default UserForm;
 UserForm.propTypes = {
   handlerAddUser: PropTypes.func.isRequired,
   initialUserform: PropTypes.object.isRequired,
-  userSelected: PropTypes.object
-}
+  userSelected: PropTypes.object,
+};
