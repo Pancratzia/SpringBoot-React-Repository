@@ -66,7 +66,7 @@ const UserForm = ({ handlerAddUser, initialUserform, userSelected }) => {
       <input type="hidden" name="id" value={id} />
 
       <button className="btn btn-primary" type="submit">
-        Crear
+        {userSelected.id !== 0 ? "Update" : "Save"}
       </button>
     </form>
   );
