@@ -16,19 +16,14 @@ export const useUsers = () => {
   const [userSelected, setUserSelected] = useState(initialUserForm);
 
   const handlerAddUser = (user) => {
-    let type;
-
-    if (userSelected.id !== 0) {
-      type = "UPDATE_USER";
-    } else {
-      type = "ADD_USER";
-    }
-
-    dispatch({ type, payload: user });
+    dispatch({
+      type: userSelected.id === 0 ? "ADD_USER" : "UPDATE_USER",
+      payload: user,
+    });
     setUserSelected(initialUserForm);
 
     const message =
-      type === "ADD_USER"
+    userSelected.id === 0
         ? "User added successfully"
         : "User updated successfully";
 
@@ -36,25 +31,20 @@ export const useUsers = () => {
   };
 
   const handlerRemoveUser = (id) => {
-
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch({ type: "REMOVE_USER", payload: id });
-        Swal.fire(
-          'Deleted!',
-          'User deleted successfully',
-          'success'
-        )
+        Swal.fire("Deleted!", "User deleted successfully", "success");
       }
-    })
+    });
   };
 
   const handlerUserSelectedForm = (user) => {
