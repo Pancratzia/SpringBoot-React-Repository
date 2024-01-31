@@ -1,4 +1,35 @@
+import { useState } from "react";
+import Swal from "sweetalert2";
+
+const initialLoginForm = {
+  username: "",
+  password: "",
+};
+
 const LoginPage = () => {
+  const [loginForm, setLoginForm] = useState(initialLoginForm);
+  const { username, password } = loginForm;
+
+  const onInputChange = ({ target: { name, value } }) => {
+    setLoginForm({ ...loginForm, [name]: value });
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    if (!username || !password) {
+      Swal.fire("Error", "All fields are required", "error");
+    }
+
+    if (username === "admin" && password === "123") {
+      //Login Correcto
+    } else {
+      Swal.fire("Error", "Invalid credentials", "error");
+    }
+
+    setLoginForm(initialLoginForm);
+  };
+
   return (
     <div className="modal" style={{ display: "block" }} tabIndex="-1">
       <div className="modal-dialog">
@@ -14,6 +45,8 @@ const LoginPage = () => {
                 className="form-control my-3"
                 placeholder="Username"
                 name="username"
+                onChange={onInputChange}
+                value={username}
                 required
               />
 
@@ -22,11 +55,17 @@ const LoginPage = () => {
                 className="form-control my-3"
                 placeholder="Password"
                 name="password"
+                onChange={onInputChange}
+                value={password}
                 required
               />
             </div>
             <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">
+              <button
+                onClick={onSubmit}
+                type="submit"
+                className="btn btn-primary"
+              >
                 Login
               </button>
             </div>
