@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
+import PropTyles from "prop-types";
 
 const initialLoginForm = {
   username: "",
   password: "",
 };
 
-const LoginPage = () => {
+const LoginPage = ( { handlerLogin }) => {
   const [loginForm, setLoginForm] = useState(initialLoginForm);
   const { username, password } = loginForm;
 
@@ -21,11 +22,7 @@ const LoginPage = () => {
       Swal.fire("Error", "All fields are required", "error");
     }
 
-    if (username === "admin" && password === "123") {
-      //Login Correcto
-    } else {
-      Swal.fire("Error", "Invalid credentials", "error");
-    }
+    handlerLogin(loginForm);
 
     setLoginForm(initialLoginForm);
   };
@@ -77,3 +74,7 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+LoginPage.propTypes = {
+  handlerLogin: PropTyles.func.isRequired,
+}
