@@ -4,10 +4,7 @@ import UsersPage from "./pages/UsersPage.jsx";
 import { loginReducer } from "./auth/reducers/loginReducer.js";
 import Swal from "sweetalert2";
 
-const initialLogin = {
-  user: undefined,
-  isAuth: false,
-};
+const initialLogin = JSON.parse(sessionStorage.getItem("login")) || { user: undefined, isAuth: false };
 
 function UsersApp() {
   const [login, dispatch] = useReducer(loginReducer, initialLogin);
@@ -22,6 +19,12 @@ function UsersApp() {
         type: "LOGIN_USER",
         payload: user,
       });
+
+      sessionStorage.setItem("login", JSON.stringify({
+        user,
+        isAuth: true
+      }));
+
     } else {
       Swal.fire("Error", "Invalid credentials", "error");
     }
