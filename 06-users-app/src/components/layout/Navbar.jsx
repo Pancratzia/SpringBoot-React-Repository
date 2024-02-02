@@ -3,11 +3,13 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = ({ login, handlerLogout }) => {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="./">
-          Users App
-        </a>
+        <h3>
+          <a className="navbar-brand" href="./">
+            Users App
+          </a>
+        </h3>
 
         <ul className="navbar-nav">
           <li className="nav-item">
@@ -34,7 +36,7 @@ const Navbar = ({ login, handlerLogout }) => {
           id="navbarNav"
         >
           <span className="nav-item nav-link text-primary m-3">
-            Welcome {login.user?.username}
+            Welcome, {login.user?.username}!
           </span>
           <button
             className="btn btn-outline-success m-3"
