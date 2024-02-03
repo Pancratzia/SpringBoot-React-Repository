@@ -9,15 +9,16 @@ const RegisterPage = ({ handlerAddUser, initialUserForm, users = [] }) => {
 
     const { id } = useParams();
 
+
     useEffect(() => {
-      const user = users.find((user) => user.id === id) || initialUserForm;
+      const user = users.find((user) => user.id === parseInt(id)) || initialUserForm;
       setUserSelected(user);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
   return (
     <div className="container my-4">
-        <h4>{userSelected.id > 0 ? "Edit User" : "New User"}</h4>
+        <h4>{parseInt(id) > 0 ? "Edit User" : "New User"}</h4>
         <div className="row">
             <div className="col">
                 <UserForm handlerAddUser={handlerAddUser} initialUserform={initialUserForm} userSelected={userSelected} />

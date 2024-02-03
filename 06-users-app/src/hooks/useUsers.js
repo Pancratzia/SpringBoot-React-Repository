@@ -19,14 +19,14 @@ export const useUsers = () => {
   const navigate = useNavigate();
 
   const handlerAddUser = (user) => {
+
     dispatch({
-      type: userSelected.id === "" ? "ADD_USER" : "UPDATE_USER",
+      type: user.id === 0 ? "ADD_USER" : "UPDATE_USER",
       payload: user,
     });
-    setUserSelected(initialUserForm);
 
     const message =
-    userSelected.id === 0
+      userSelected.id === 0
         ? "User added successfully"
         : "User updated successfully";
 
@@ -56,15 +56,15 @@ export const useUsers = () => {
     setVisibleForm(true);
     setUserSelected({ ...user });
   };
-  
+
   const handlerOpenForm = () => {
     setVisibleForm(true);
-  }
+  };
 
   const handlerCloseForm = () => {
     setVisibleForm(false);
     setUserSelected(initialUserForm);
-  }
+  };
 
   return {
     users,
@@ -75,6 +75,6 @@ export const useUsers = () => {
     handlerUserSelectedForm,
     visibleForm,
     handlerOpenForm,
-    handlerCloseForm
+    handlerCloseForm,
   };
 };

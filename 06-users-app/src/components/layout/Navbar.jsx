@@ -6,9 +6,9 @@ const Navbar = ({ login, handlerLogout }) => {
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
       <div className="container-fluid">
         <h3>
-          <a className="navbar-brand" href="./">
+          <NavLink className="navbar-brand" to="/users">
             Users App
-          </a>
+          </NavLink>
         </h3>
 
         <ul className="navbar-nav">
