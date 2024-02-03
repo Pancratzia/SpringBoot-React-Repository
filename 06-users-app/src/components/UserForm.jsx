@@ -33,7 +33,6 @@ const UserForm = ({
     }
 
     handlerAddUser(userForm);
-
     setUserForm(initialUserform);
   };
 

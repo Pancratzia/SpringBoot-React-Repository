@@ -20,7 +20,7 @@ export const useUsers = () => {
 
   const handlerAddUser = (user) => {
     dispatch({
-      type: userSelected.id === 0 ? "ADD_USER" : "UPDATE_USER",
+      type: userSelected.id === "" ? "ADD_USER" : "UPDATE_USER",
       payload: user,
     });
     setUserSelected(initialUserForm);
