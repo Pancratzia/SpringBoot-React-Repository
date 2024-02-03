@@ -11,8 +11,10 @@ const RegisterPage = ({ handlerAddUser, initialUserForm, users = [] }) => {
 
 
     useEffect(() => {
-      const user = users.find((user) => user.id === parseInt(id)) || initialUserForm;
-      setUserSelected(user);
+      if(id){
+        const user = users.find((user) => user.id === parseInt(id)) || initialUserForm;
+        setUserSelected(user);
+      }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 

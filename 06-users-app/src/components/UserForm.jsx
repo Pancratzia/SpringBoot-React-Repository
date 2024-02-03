@@ -32,6 +32,11 @@ const UserForm = ({
       return;
     }
 
+    if(email.includes ("@") === false){
+      Swal.fire("Error", "Invalid email", "error");
+      return;
+    }
+
     handlerAddUser(userForm);
     setUserForm(initialUserform);
   };
