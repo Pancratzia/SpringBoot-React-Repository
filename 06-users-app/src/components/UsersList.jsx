@@ -20,6 +20,7 @@ const UsersList = ({
               <th>Username</th>
               <th>Email</th>
               <th>Update</th>
+              <th>Advanced Update</th>
               <th>Delete</th>
             </tr>
           </thead>

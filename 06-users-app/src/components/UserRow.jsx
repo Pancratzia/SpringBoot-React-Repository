@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 
 const UserRow = ({ user, handlerRemoveUser, handlerUserSelectedForm }) => {
   const { id, username, email } = user;
@@ -21,6 +22,11 @@ const UserRow = ({ user, handlerRemoveUser, handlerUserSelectedForm }) => {
         >
           Update
         </button>
+      </td>
+      <td>
+        <NavLink className="btn btn-secondary" to={`/users/edit/${id}`}>
+          Advanced Update
+        </NavLink>
       </td>
       <td>
         <button

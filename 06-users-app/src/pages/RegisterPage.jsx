@@ -1,10 +1,13 @@
 import { useState } from "react";
 import UserForm from "../components/UserForm"
 import PropTypes from "prop-types"
+import { useParams } from "react-router-dom";
 
 const RegisterPage = ({ handlerAddUser, initialUserForm }) => {
 
     const [userSelected, setUserSelected] = useState(initialUserForm);
+
+    const { id } = useParams();
 
   return (
     <div className="container my-4">
