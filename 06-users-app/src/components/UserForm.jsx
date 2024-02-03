@@ -84,13 +84,15 @@ const UserForm = ({
       <button className="btn btn-primary" type="submit">
         {userSelected.id !== 0 ? "Update" : "Save"}
       </button>
-      <button
+      {handlerCloseForm && (
+        <button
         onClick={onCloseForm}
         type="button"
         className="btn btn-secondary mx-2"
       >
         Cerrar
       </button>
+      )}
     </form>
   );
 };
