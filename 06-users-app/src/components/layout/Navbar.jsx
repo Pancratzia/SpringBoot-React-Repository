@@ -17,6 +17,11 @@ const Navbar = ({ login, handlerLogout }) => {
               Usuarios
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/users/register">
+              Registro
+            </NavLink>
+          </li>
         </ul>
 
         <button
