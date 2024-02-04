@@ -4,8 +4,8 @@ import Swal from "sweetalert2";
 import { UserContext } from "../context/UserContext";
 
 const UserForm = ({ userSelected, handlerCloseForm }) => {
-  const { handlerAddUser, initialUserform } = useContext(UserContext);
-  const [userForm, setUserForm] = useState(initialUserform);
+  const { handlerAddUser, initialUserForm } = useContext(UserContext);
+  const [userForm, setUserForm] = useState(initialUserForm);
 
   const { username, password, email, id } = userForm;
 
@@ -35,12 +35,12 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
     }
 
     handlerAddUser(userForm);
-    setUserForm(initialUserform);
+    setUserForm(initialUserForm);
   };
 
   const onCloseForm = () => {
     handlerCloseForm();
-    setUserForm(initialUserform);
+    setUserForm(initialUserForm);
   };
 
   return (

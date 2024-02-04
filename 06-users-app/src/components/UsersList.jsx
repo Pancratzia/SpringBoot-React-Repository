@@ -1,11 +1,9 @@
-import PropTypes from "prop-types";
 import UserRow from "./UserRow";
+import { UserContext } from "../context/UserContext";
+import { useContext } from "react";
 
-const UsersList = ({
-  users = [],
-  handlerRemoveUser,
-  handlerUserSelectedForm,
-}) => {
+const UsersList = () => {
+  const { users = [] } = useContext(UserContext);
   return (
     <>
       {users.length === 0 ? (
@@ -26,14 +24,7 @@ const UsersList = ({
           </thead>
           <tbody>
             {users.map((user) => {
-              return (
-                <UserRow
-                  key={user.id}
-                  user={user}
-                  handlerRemoveUser={handlerRemoveUser}
-                  handlerUserSelectedForm={handlerUserSelectedForm}
-                />
-              );
+              return <UserRow key={user.id} user={user} />;
             })}
           </tbody>
         </table>
@@ -43,9 +34,3 @@ const UsersList = ({
 };
 
 export default UsersList;
-
-UsersList.propTypes = {
-  users: PropTypes.array,
-  handlerRemoveUser: PropTypes.func,
-  handlerUserSelectedForm: PropTypes.func,
-};

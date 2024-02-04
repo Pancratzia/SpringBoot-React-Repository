@@ -1,8 +1,12 @@
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
-const UserRow = ({ user, handlerRemoveUser, handlerUserSelectedForm }) => {
+const UserRow = ({ user }) => {
   const { id, username, email } = user;
+  const { handlerRemoveUser, handlerUserSelectedForm } =
+    useContext(UserContext);
 
   return (
     <tr>
@@ -16,7 +20,7 @@ const UserRow = ({ user, handlerRemoveUser, handlerUserSelectedForm }) => {
             handlerUserSelectedForm({
               id,
               username,
-              email
+              email,
             })
           }
         >
@@ -44,6 +48,4 @@ export default UserRow;
 
 UserRow.propTypes = {
   user: PropTypes.object,
-  handlerRemoveUser: PropTypes.func,
-  handlerUserSelectedForm: PropTypes.func,
 };
