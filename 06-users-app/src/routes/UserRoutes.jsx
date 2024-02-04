@@ -3,49 +3,23 @@ import UsersPage from "../pages/UsersPage.jsx";
 import Navbar from "../components/layout/Navbar.jsx";
 import PropTypes from "prop-types";
 import RegisterPage from "../pages/RegisterPage.jsx";
-import { useUsers } from "../hooks/useUsers.js";
+import { UserProvider } from "../context/UserProvider.jsx";
 
 const UserRoutes = ({ login, handlerLogout }) => {
-  const {
-    users,
-    userSelected,
-    initialUserForm,
-    handlerAddUser,
-    handlerRemoveUser,
-    handlerUserSelectedForm,
-    visibleForm,
-    handlerOpenForm,
-    handlerCloseForm,
-  } = useUsers();
-
   return (
     <>
-      <Navbar login={login} handlerLogout={handlerLogout} />
-      <Routes>
-        <Route
-          path="users"
-          element={
-            <UsersPage
-              users={users}
-              userSelected={userSelected}
-              initialUserForm={initialUserForm}
-              visibleForm={visibleForm}
-              handlerAddUser={handlerAddUser}
-              handlerRemoveUser={handlerRemoveUser}
-              handlerUserSelectedForm={handlerUserSelectedForm}
-              handlerOpenForm={handlerOpenForm}
-              handlerCloseForm={handlerCloseForm}
-            />
-          }
-        />
-        <Route path="users/register" element={<RegisterPage handlerAddUser={handlerAddUser} initialUserForm={initialUserForm} />} />
-        
-        <Route path="users/register" element={<RegisterPage handlerAddUser={handlerAddUser} initialUserForm={initialUserForm} users={users} />} />
+      <UserProvider>
+        <Navbar login={login} handlerLogout={handlerLogout} />
+        <Routes>
+          <Route path="users" element={<UsersPage />} />
 
-        <Route path="users/edit/:id" element={<RegisterPage handlerAddUser={handlerAddUser} initialUserForm={initialUserForm} users={users} />} />
-        
-        <Route path="/" element={<Navigate to="/users" />} />
-      </Routes>
+          <Route path="users/register" element={<RegisterPage />} />
+
+          <Route path="users/edit/:id" element={<RegisterPage />} />
+
+          <Route path="/" element={<Navigate to="/users" />} />
+        </Routes>
+      </UserProvider>
     </>
   );
 };

@@ -1,29 +1,23 @@
 import PropTypes from "prop-types";
 import UserModalForm from "../components/UserModalForm";
 import UsersList from "../components/UsersList";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
-const UsersPage = ({
-  users,
-  userSelected,
-  initialUserForm,
-  handlerAddUser,
-  handlerRemoveUser,
-  handlerUserSelectedForm,
-  visibleForm,
-  handlerOpenForm,
-  handlerCloseForm,
-}) => {
+const UsersPage = () => {
+
+  const {
+    users,
+    handlerRemoveUser,
+    handlerUserSelectedForm,
+    visibleForm,
+    handlerOpenForm,
+  } = useContext(UserContext);
 
   return (
     <>
     {visibleForm && (
-        <UserModalForm 
-          handlerAddUser={handlerAddUser}
-          initialUserForm={initialUserForm}
-          userSelected={userSelected}
-          handlerCloseForm={handlerCloseForm}
-          visibleForm={visibleForm}
-        />
+        <UserModalForm />
       )}
       <div className="container my-4">
         <h2>Users App</h2>

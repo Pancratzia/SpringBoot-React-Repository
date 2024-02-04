@@ -1,40 +1,35 @@
-import { useEffect, useState } from "react";
-import UserForm from "../components/UserForm"
-import PropTypes from "prop-types"
+import { useContext, useEffect, useState } from "react";
+import UserForm from "../components/UserForm";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
-const RegisterPage = ({ handlerAddUser, initialUserForm, users = [] }) => {
+const RegisterPage = () => {
 
-    const [userSelected, setUserSelected] = useState(initialUserForm);
+  const { initialUserForm, users = [] } = useContext(UserContext);
+  const [userSelected, setUserSelected] = useState(initialUserForm);
 
-    const { id } = useParams();
+  const { id } = useParams();
 
-
-    useEffect(() => {
-      if(id){
-        const user = users.find((user) => user.id === parseInt(id)) || initialUserForm;
-        setUserSelected(user);
-      }
+  useEffect(() => {
+    if (id) {
+      const user =
+        users.find((user) => user.id === parseInt(id)) || initialUserForm;
+      setUserSelected(user);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id]);
+  }, [id]);
 
   return (
     <div className="container my-4">
-        <h4>{parseInt(id) > 0 ? "Edit User" : "New User"}</h4>
-        <div className="row">
-            <div className="col">
-                <UserForm handlerAddUser={handlerAddUser} initialUserform={initialUserForm} userSelected={userSelected} />
-            </div>
+      <h4>{parseInt(id) > 0 ? "Edit User" : "New User"}</h4>
+      <div className="row">
+        <div className="col">
+          <UserForm userSelected={userSelected} />
         </div>
-        
+      </div>
     </div>
-  )
-}
+  );
+  
+};
 
 export default RegisterPage;
-
-RegisterPage.propTypes = {
-  handlerAddUser: PropTypes.func.isRequired,
-  initialUserForm: PropTypes.object.isRequired,
-  users: PropTypes.array,
-}

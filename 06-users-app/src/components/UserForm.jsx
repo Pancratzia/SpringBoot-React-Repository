@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
+import { UserContext } from "../context/UserContext";
 
-const UserForm = ({
-  handlerAddUser,
-  initialUserform,
-  userSelected,
-  handlerCloseForm,
-}) => {
+const UserForm = ({ userSelected, handlerCloseForm }) => {
+  const { handlerAddUser, initialUserform } = useContext(UserContext);
   const [userForm, setUserForm] = useState(initialUserform);
 
   const { username, password, email, id } = userForm;
@@ -32,7 +29,7 @@ const UserForm = ({
       return;
     }
 
-    if(email.includes ("@") === false){
+    if (email.includes("@") === false) {
       Swal.fire("Error", "Invalid email", "error");
       return;
     }
@@ -90,12 +87,12 @@ const UserForm = ({
       </button>
       {handlerCloseForm && (
         <button
-        onClick={onCloseForm}
-        type="button"
-        className="btn btn-secondary mx-2"
-      >
-        Cerrar
-      </button>
+          onClick={onCloseForm}
+          type="button"
+          className="btn btn-secondary mx-2"
+        >
+          Cerrar
+        </button>
       )}
     </form>
   );
@@ -104,8 +101,6 @@ const UserForm = ({
 export default UserForm;
 
 UserForm.propTypes = {
-  handlerAddUser: PropTypes.func.isRequired,
-  initialUserform: PropTypes.object.isRequired,
   userSelected: PropTypes.object,
   handlerCloseForm: PropTypes.func,
 };

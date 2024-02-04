@@ -1,12 +1,15 @@
+import { useContext } from "react"
 import UserForm from "./UserForm"
-import PropTypes from "prop-types"
+import { UserContext } from "../context/UserContext"
 
-const UserModalForm = ({ handlerAddUser, initialUserForm, userSelected, handlerCloseForm, visibleForm }) => {
+const UserModalForm = () => {
+
+  const {  userSelected, handlerCloseForm } = useContext(UserContext);
   return (
     <div className="abrir-modal animacion fadeIn">
           <div
             className="modal"
-            style={{ display: visibleForm ? "block" : "" }}
+            style={{ display:  "block" }}
             tabIndex={-1}
           >
             <div className="modal-dialog" role="document">
@@ -19,8 +22,6 @@ const UserModalForm = ({ handlerAddUser, initialUserForm, userSelected, handlerC
 
                 <div className="modal-body">
                   <UserForm
-                    handlerAddUser={handlerAddUser}
-                    initialUserform={initialUserForm}
                     userSelected={userSelected}
                     handlerCloseForm={handlerCloseForm}
                   />
@@ -33,12 +34,3 @@ const UserModalForm = ({ handlerAddUser, initialUserForm, userSelected, handlerC
 }
 
 export default UserModalForm;
-
-
-UserModalForm.propTypes = {
-  handlerAddUser: PropTypes.func.isRequired,
-  initialUserForm: PropTypes.object.isRequired,
-  userSelected: PropTypes.object,
-  handlerCloseForm: PropTypes.func.isRequired,
-  visibleForm: PropTypes.bool.isRequired,
-}
