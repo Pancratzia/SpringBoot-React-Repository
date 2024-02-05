@@ -14,12 +14,12 @@ function UsersApp() {
         <>
           <Route
             path="*"
-            element={<UserRoutes login={login} handlerLogout={handlerLogout} />}
+            element={<UserRoutes />}
           />
         </>
       ) : (
         <>
-          <Route path="*" element={<LoginPage handlerLogin={handlerLogin} />} />
+          <Route path="*" element={<LoginPage />} />
           <Route path="/*" element={<Navigate to="/login" />} />
         </>
       )}

@@ -1,15 +1,15 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import UsersPage from "../pages/UsersPage.jsx";
 import Navbar from "../components/layout/Navbar.jsx";
-import PropTypes from "prop-types";
 import RegisterPage from "../pages/RegisterPage.jsx";
 import { UserProvider } from "../context/UserProvider.jsx";
 
-const UserRoutes = ({ login, handlerLogout }) => {
+const UserRoutes = () => {
+
   return (
     <>
       <UserProvider>
-        <Navbar login={login} handlerLogout={handlerLogout} />
+        <Navbar/>
         <Routes>
           <Route path="users" element={<UsersPage />} />
 
@@ -26,7 +26,3 @@ const UserRoutes = ({ login, handlerLogout }) => {
 
 export default UserRoutes;
 
-UserRoutes.propTypes = {
-  login: PropTypes.object.isRequired,
-  handlerLogout: PropTypes.func.isRequired,
-};

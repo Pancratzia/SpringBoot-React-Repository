@@ -1,7 +1,12 @@
-import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
 
-const Navbar = ({ login, handlerLogout }) => {
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../auth/context/AuthContext";
+
+const Navbar = () => {
+
+  const { login, handlerLogout } = useContext(AuthContext);
+
   return (
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
       <div className="container-fluid">
@@ -56,8 +61,3 @@ const Navbar = ({ login, handlerLogout }) => {
 };
 
 export default Navbar;
-
-Navbar.propTypes = {
-  handlerLogout: PropTypes.func.isRequired,
-  login: PropTypes.object.isRequired,
-};
