@@ -6,9 +6,13 @@ import ProductCardVie from "./ProductCardView";
 const CatalogView = ({ handler }) => {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const data = getProducts();
+  const findAll = async () => {
+    const data = await getProducts();
     setProducts(data);
+  }
+
+  useEffect(() => {
+    findAll();
   }, []);
 
   return (
