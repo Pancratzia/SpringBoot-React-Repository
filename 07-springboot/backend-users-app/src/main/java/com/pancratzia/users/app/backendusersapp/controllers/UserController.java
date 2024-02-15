@@ -12,6 +12,11 @@ import com.pancratzia.users.app.backendusersapp.models.entities.User;
 import com.pancratzia.users.app.backendusersapp.services.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import org.springframework.http.HttpStatus;
+
 
 
 @RestController
@@ -35,5 +40,10 @@ public class UserController {
             return ResponseEntity.ok(userOptional.orElseThrow());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody User user){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(user));
     }
 }
