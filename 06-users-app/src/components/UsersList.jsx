@@ -1,9 +1,14 @@
 import UserRow from "./UserRow";
 import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const UsersList = () => {
-  const { users = [] } = useContext(UserContext);
+  const { users = [], getUsers } = useContext(UserContext);
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
     <>
       {users.length === 0 ? (

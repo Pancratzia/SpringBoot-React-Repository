@@ -30,6 +30,9 @@ export const usersReducer = (state = [], action) => {
         }
         return user;
       })
+
+    case "LOADING_USERS":
+      return action.payload;
     default:
       return state;
   }

@@ -14,6 +14,7 @@ export const UserProvider = ({ children }) => {
         visibleForm,
         handlerOpenForm,
         handlerCloseForm,
+        getUsers
       } = useUsers();
 
     return (
@@ -26,7 +27,8 @@ export const UserProvider = ({ children }) => {
             handlerUserSelectedForm,
             visibleForm,
             handlerOpenForm,
-            handlerCloseForm
+            handlerCloseForm,
+            getUsers
         }}> 
             {children} 
         </UserContext.Provider>
