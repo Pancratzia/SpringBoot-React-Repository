@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pancratzia.users.app.backendusersapp.models.entities.User;
 import com.pancratzia.users.app.backendusersapp.services.UserService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(originPatterns = "*")
 public class UserController {
 
     @Autowired

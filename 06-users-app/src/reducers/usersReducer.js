@@ -1,19 +1,14 @@
-import { generateRandomId } from "../helpers/userHelper";
+
 
 export const usersReducer = (state = [], action) => {
 
-  let id;
 
   switch (action.type) {
     case "ADD_USER":
-      do {
-        id = generateRandomId();
-      } while (isIdDuplicated(state, id));
       return [
         ...state,
         {
-          ...action.payload,
-          id,
+          ...action.payload
         },
       ];
     
@@ -39,6 +34,3 @@ export const usersReducer = (state = [], action) => {
   
 };
 
-function isIdDuplicated(state, id) {
-  return state.some((user) => user.id === id);
-}
