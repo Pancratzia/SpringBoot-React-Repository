@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "users-app",
-    "dateExported": "2024-02-24T19:36:05.901Z",
+    "dateExported": "2024-02-24T19:38:01.668Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -42,7 +42,7 @@
             "method": "POST",
             "sortNum": 40000,
             "created": "2024-02-24T19:31:52.367Z",
-            "modified": "2024-02-24T19:35:19.335Z",
+            "modified": "2024-02-24T19:37:15.131Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -52,7 +52,7 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"username\": \"Arthuro\",\n  \"email\": \"arthuro@correo.com\",\n  \"password\": \"123456\"\n}",
+                "raw": "{\n  \"username\": \"Borrado\",\n  \"email\": \"borrado@correo.com\",\n  \"password\": \"123456\"\n}",
                 "form": []
             },
             "tests": []
@@ -79,6 +79,20 @@
                 "raw": "{\n  \"username\": \"Pancratzia\",\n  \"email\": \"correo@correo.com\"\n}",
                 "form": []
             },
+            "tests": []
+        },
+        {
+            "_id": "0693ba28-7a36-4254-90fd-cc94b5865027",
+            "colId": "5174c4be-6a09-438d-a21c-a043c2ea095f",
+            "containerId": "",
+            "name": "DELETE USER",
+            "url": "http://127.0.0.1:8080/users/5",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2024-02-24T19:37:26.971Z",
+            "modified": "2024-02-24T19:37:46.186Z",
+            "headers": [],
+            "params": [],
             "tests": []
         }
     ]
