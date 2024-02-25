@@ -1,9 +1,13 @@
 package com.pancratzia.users.app.backendusersapp.models.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import jakarta.persistence.GenerationType;
 
 @Entity
@@ -14,8 +18,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Size(min = 4, max = 12)
+    @Column(unique = true)
     private String username;
+
+    @NotBlank
     private String password;
+
+    @NotBlank
+    @Email
+    @Column(unique = true)
     private String email;
     
     public Long getId() {
