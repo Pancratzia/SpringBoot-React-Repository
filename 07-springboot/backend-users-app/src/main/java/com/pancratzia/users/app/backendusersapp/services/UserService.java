@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.pancratzia.users.app.backendusersapp.models.entities.User;
-import com.pancratzia.users.app.backendusersapp.models.entities.UserRequest;
+import com.pancratzia.users.app.backendusersapp.models.request.UserRequest;
 
 public interface UserService {
 
