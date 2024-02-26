@@ -13,39 +13,55 @@ const initialUserForm = {
   email: "",
 };
 
+const initialErrors = {
+  username: "",
+  email: "",
+  password: "",
+};
+
 export const useUsers = () => {
   const [users, dispatch] = useReducer(usersReducer, initialUsers);
   const [userSelected, setUserSelected] = useState(initialUserForm);
   const [visibleForm, setVisibleForm] = useState(false);
+
+  const [errors, setErrors] = useState(initialErrors);
   const navigate = useNavigate();
 
   const getUsers = async () => {
     const result = await findAll();
     dispatch({ type: "LOADING_USERS", payload: result.data || [] });
-  }
+  };
 
   const handlerAddUser = async (user) => {
-
     let response;
-    if(user.id === 0){
-      response = await save(user);
-    }else{
-      response = await update(user);
+
+    try {
+      if (user.id === 0) {
+        response = await save(user);
+      } else {
+        response = await update(user);
+      }
+
+      dispatch({
+        type: user.id === 0 ? "ADD_USER" : "UPDATE_USER",
+        payload: response.data,
+      });
+
+      const message =
+        userSelected.id === 0
+          ? "User added successfully"
+          : "User updated successfully";
+
+      Swal.fire("Success", message, "success");
+      handlerCloseForm();
+      navigate("/users");
+    } catch (error) {
+      if(error.response && error.response.status === 400){
+        setErrors(error.response.data);
+      }else{
+        throw error;
+      }
     }
-
-    dispatch({
-      type: user.id === 0 ? "ADD_USER" : "UPDATE_USER",
-      payload: response.data,
-    });
-
-    const message =
-      userSelected.id === 0
-        ? "User added successfully"
-        : "User updated successfully";
-
-    Swal.fire("Success", message, "success");
-    handlerCloseForm();
-    navigate("/users");
   };
 
   const handlerRemoveUser = (id) => {
@@ -90,6 +106,7 @@ export const useUsers = () => {
     visibleForm,
     handlerOpenForm,
     handlerCloseForm,
-    getUsers
+    getUsers,
+    errors,
   };
 };

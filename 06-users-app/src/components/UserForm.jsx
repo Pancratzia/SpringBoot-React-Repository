@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import Swal from "sweetalert2";
+//import Swal from "sweetalert2";
 import { UserContext } from "../context/UserContext";
 
 const UserForm = ({ userSelected, handlerCloseForm }) => {
-  const { handlerAddUser, initialUserForm } = useContext(UserContext);
+  const { handlerAddUser, initialUserForm, errors } = useContext(UserContext);
   const [userForm, setUserForm] = useState(initialUserForm);
 
   const { username, password, email, id } = userForm;
@@ -20,6 +20,7 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
   const onSubmit = (event) => {
     event.preventDefault();
 
+    /*
     if (
       username.trim() === "" ||
       email.trim() === "" ||
@@ -33,6 +34,7 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
       Swal.fire("Error", "Invalid email", "error");
       return;
     }
+    */
 
     handlerAddUser(userForm);
     setUserForm(initialUserForm);
@@ -54,7 +56,7 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
           onChange={onInputChange}
           value={username}
           id="username"
-          required
+          
         />
       </div>
 
@@ -66,7 +68,7 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
           name="password"
           onChange={onInputChange}
           value={password}
-          required
+          
         />
       )}
 
@@ -77,7 +79,7 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
         name="email"
         onChange={onInputChange}
         value={email}
-        required
+        
       />
 
       <input type="hidden" name="id" value={id} />
