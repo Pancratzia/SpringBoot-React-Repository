@@ -27,7 +27,7 @@ export const update = async ({ id, username, email }) => {
     
   // eslint-disable-next-line no-useless-catch
   try {
-    const response = await axios.put(`${BASE_URL}/${id}`, { username, email });
+    const response = await axios.put(`${BASE_URL}/${id}`, { username, email, password: "nothing" });
     return response;
   }
   catch (error) {
