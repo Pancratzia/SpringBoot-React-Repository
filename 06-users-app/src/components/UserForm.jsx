@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-//import Swal from "sweetalert2";
 import { UserContext } from "../context/UserContext";
 
 const UserForm = ({ userSelected, handlerCloseForm }) => {
@@ -19,25 +18,7 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-
-    /*
-    if (
-      username.trim() === "" ||
-      email.trim() === "" ||
-      (id === 0 && password.trim() === "")
-    ) {
-      Swal.fire("Error", "All fields are required", "error");
-      return;
-    }
-
-    if (email.includes("@") === false) {
-      Swal.fire("Error", "Invalid email", "error");
-      return;
-    }
-    */
-
     handlerAddUser(userForm);
-    setUserForm(initialUserForm);
   };
 
   const onCloseForm = () => {
@@ -47,7 +28,7 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="form-field">
+      
         <input
           className="form-control my-3 "
           type="text"
@@ -56,20 +37,24 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
           onChange={onInputChange}
           value={username}
           id="username"
-          
         />
-      </div>
+
+        <p className="text-danger">{errors?.username}</p>
+      
 
       {id === 0 && (
-        <input
-          className="form-control my-3"
-          type="password"
-          placeholder="Password"
-          name="password"
-          onChange={onInputChange}
-          value={password}
-          
-        />
+        <>
+          <input
+            className="form-control my-3"
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={onInputChange}
+            value={password}
+          />
+
+          <p className="text-danger">{errors?.password}</p>
+        </>
       )}
 
       <input
@@ -79,8 +64,9 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
         name="email"
         onChange={onInputChange}
         value={email}
-        
       />
+
+      <p className="text-danger">{errors?.email}</p>
 
       <input type="hidden" name="id" value={id} />
 
