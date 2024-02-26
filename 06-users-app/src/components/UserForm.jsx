@@ -37,6 +37,7 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
           onChange={onInputChange}
           value={username}
           id="username"
+          required
         />
 
         <p className="text-danger">{errors?.username}</p>
@@ -51,6 +52,7 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
             name="password"
             onChange={onInputChange}
             value={password}
+            required
           />
 
           <p className="text-danger">{errors?.password}</p>
@@ -64,6 +66,7 @@ const UserForm = ({ userSelected, handlerCloseForm }) => {
         name="email"
         onChange={onInputChange}
         value={email}
+        required
       />
 
       <p className="text-danger">{errors?.email}</p>
