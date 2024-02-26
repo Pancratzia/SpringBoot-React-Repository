@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.pancratzia.users.app.backendusersapp.models.entities.User;
+import com.pancratzia.users.app.backendusersapp.models.entities.UserRequest;
 import com.pancratzia.users.app.backendusersapp.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -54,7 +55,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody User user, BindingResult result) {
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody UserRequest user, BindingResult result) {
 
         if(result.hasErrors()) {
             return validation(result);

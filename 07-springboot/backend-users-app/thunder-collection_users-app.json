@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "users-app",
-    "dateExported": "2024-02-24T19:38:01.668Z",
+    "dateExported": "2024-02-26T20:09:34.486Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -24,11 +24,11 @@
             "colId": "5174c4be-6a09-438d-a21c-a043c2ea095f",
             "containerId": "",
             "name": "GET USER",
-            "url": "http://127.0.0.1:8080/users/2",
+            "url": "http://127.0.0.1:8080/users/4",
             "method": "GET",
             "sortNum": 30000,
             "created": "2024-02-24T19:31:25.149Z",
-            "modified": "2024-02-24T19:35:43.985Z",
+            "modified": "2024-02-24T23:01:57.135Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -42,7 +42,7 @@
             "method": "POST",
             "sortNum": 40000,
             "created": "2024-02-24T19:31:52.367Z",
-            "modified": "2024-02-24T19:37:15.131Z",
+            "modified": "2024-02-25T02:58:49.751Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -52,7 +52,7 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"username\": \"Borrado\",\n  \"email\": \"borrado@correo.com\",\n  \"password\": \"123456\"\n}",
+                "raw": "{\n  \"username\": \"Sassy\",\n  \"email\": \"correo5@correo.com\",\n  \"password\": \"123456\"\n}",
                 "form": []
             },
             "tests": []
@@ -66,7 +66,7 @@
             "method": "PUT",
             "sortNum": 50000,
             "created": "2024-02-24T19:33:03.381Z",
-            "modified": "2024-02-24T19:35:34.396Z",
+            "modified": "2024-02-26T20:09:30.796Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -76,7 +76,7 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"username\": \"Pancratzia\",\n  \"email\": \"correo@correo.com\"\n}",
+                "raw": "{\n  \"username\": \"Pancratzia\",\n  \"email\": \"pancratzia@correo.com\"\n}",
                 "form": []
             },
             "tests": []
