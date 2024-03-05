@@ -1,6 +1,9 @@
 package com.pancratzia.users.app.backendusersapp.auth.filters;
 
 import java.io.IOException;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -57,6 +60,22 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
             Authentication authResult) throws IOException, ServletException {
 
+                String username = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getUsername();
+
+                String originalInput = "algun_toke_con_una_frase_secreta." + username;
+                String token = Base64.getEncoder().encodeToString(originalInput.getBytes());
+
+                response.addHeader("Authorization", "Bearer " + token);
+
+                @SuppressWarnings({ "rawtypes", "unchecked" })
+                Map<String, Object> body = new HashMap();
+
+                body.put("token", token);
+                body.put("message", String.format("Hola! Has iniciado sesión como %s", username));
+                body.put("username", username);
+                response.getWriter().write(new ObjectMapper().writeValueAsString(body));
+                response.setStatus(200);
+                response.setContentType("application/json");
     }
 
     @Override
