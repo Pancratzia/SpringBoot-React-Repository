@@ -59,7 +59,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
                 String username = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getUsername();
 
-                String originalInput = "algun_toke_con_una_frase_secreta." + username;
+                String originalInput = "algun_token_con_alguna_frase_secreta." + username;
                 String token = Base64.getEncoder().encodeToString(originalInput.getBytes());
 
                 response.addHeader("Authorization", "Bearer " + token);
