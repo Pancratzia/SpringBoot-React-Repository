@@ -71,7 +71,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 Map<String, Object> body = new HashMap();
 
                 body.put("token", token);
-                body.put("message", String.format("Hola! Has iniciado sesión como %s", username));
+                body.put("message", String.format("Hi! You are now logged in as %s", username));
                 body.put("username", username);
                 response.getWriter().write(new ObjectMapper().writeValueAsString(body));
                 response.setStatus(200);
@@ -83,7 +83,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             AuthenticationException failed) throws IOException, ServletException {
 
                 Map<String, Object> body = new HashMap<>();
-                body.put("message", "Error en el login. Username o password incorrectos");
+                body.put("message", "Login error. Check your credentials and try again");
                 body.put("error", failed.getMessage());
 
                 response.getWriter().write(new ObjectMapper().writeValueAsString(body));
