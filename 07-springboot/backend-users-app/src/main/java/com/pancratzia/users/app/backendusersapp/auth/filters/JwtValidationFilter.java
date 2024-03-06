@@ -21,6 +21,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import static com.pancratzia.users.app.backendusersapp.auth.TokenJwtConfig.*;
+
+
 public class JwtValidationFilter extends BasicAuthenticationFilter {
 
     public JwtValidationFilter(AuthenticationManager authenticationManager) {
@@ -31,14 +34,14 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        String header = request.getHeader("Authorization");
+        String header = request.getHeader(HEADER_AUTHORIZATION);
 
-        if (header == null || !header.startsWith("Bearer ")) {
+        if (header == null || !header.startsWith(PREFIX_TOKEN)) {
             chain.doFilter(request, response);
             return;
         }
 
-        String token = header.replace("Bearer ", "");
+        String token = header.replace(PREFIX_TOKEN, "");
         byte[] tokenDecodeBytes = Base64.getDecoder().decode(token);
         String tokenDecode = new String(tokenDecodeBytes);
 
@@ -46,10 +49,10 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
         String secret = tokenArr[0];
         String username = tokenArr[1];
 
-        if("algun_token_con_alguna_frase_secreta".equals(secret)) {
+        if(SECRET_KEY.equals(secret)) {
             List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, authorities);
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             chain.doFilter(request, response);
