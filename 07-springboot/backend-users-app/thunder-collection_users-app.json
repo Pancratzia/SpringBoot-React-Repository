@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "users-app",
-    "dateExported": "2024-02-26T20:09:34.486Z",
+    "dateExported": "2024-03-06T00:23:00.685Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -14,9 +14,10 @@
             "method": "GET",
             "sortNum": 20000,
             "created": "2024-02-24T19:30:42.470Z",
-            "modified": "2024-02-24T19:30:55.676Z",
+            "modified": "2024-03-05T20:47:26.927Z",
             "headers": [],
             "params": [],
+            "reqType": "get",
             "tests": []
         },
         {
@@ -28,9 +29,10 @@
             "method": "GET",
             "sortNum": 30000,
             "created": "2024-02-24T19:31:25.149Z",
-            "modified": "2024-02-24T23:01:57.135Z",
+            "modified": "2024-03-06T00:22:38.208Z",
             "headers": [],
             "params": [],
+            "reqType": "get",
             "tests": []
         },
         {
@@ -93,6 +95,30 @@
             "modified": "2024-02-24T19:37:46.186Z",
             "headers": [],
             "params": [],
+            "tests": []
+        },
+        {
+            "_id": "9412f34d-d9e2-4bc8-81c4-bc64dce8dadc",
+            "colId": "5174c4be-6a09-438d-a21c-a043c2ea095f",
+            "containerId": "",
+            "name": "LOGIN",
+            "url": "http://127.0.0.1:8080/login",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2024-03-06T00:17:19.225Z",
+            "modified": "2024-03-06T00:18:06.498Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"12345\"\n}",
+                "form": []
+            },
             "tests": []
         }
     ]
