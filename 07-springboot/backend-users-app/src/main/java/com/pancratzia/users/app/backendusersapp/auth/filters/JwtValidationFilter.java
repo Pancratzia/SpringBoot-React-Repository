@@ -54,6 +54,8 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
 
             Object authoritiesClaims = claims.get("authorities");
             String username = claims.getSubject();
+            //Otro modo - Se debe agregar el claims de username en JwtAuthenticationFilter
+            //Object username2 = claims.get("username");
 
             Collection<? extends GrantedAuthority> authorities = Arrays
                     .asList(new ObjectMapper()
