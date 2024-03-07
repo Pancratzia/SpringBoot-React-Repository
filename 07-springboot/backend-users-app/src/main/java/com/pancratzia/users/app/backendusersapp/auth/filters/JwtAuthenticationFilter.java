@@ -1,7 +1,7 @@
 package com.pancratzia.users.app.backendusersapp.auth.filters;
 
 import java.io.IOException;
-import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pancratzia.users.app.backendusersapp.models.entities.User;
 
+import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -59,35 +60,40 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
             Authentication authResult) throws IOException, ServletException {
 
-                String username = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getUsername();
+        String username = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal())
+                .getUsername();
 
-                String originalInput = SECRET_KEY + "." + username;
-                String token = Base64.getEncoder().encodeToString(originalInput.getBytes());
+        String token = Jwts.builder()
+                .subject(username)
+                .signWith(SECRET_KEY)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 3600000))
+                .compact();
 
-                response.addHeader(HEADER_AUTHORIZATION, PREFIX_TOKEN + token);
+        response.addHeader(HEADER_AUTHORIZATION, PREFIX_TOKEN + token);
 
-                @SuppressWarnings({ "rawtypes", "unchecked" })
-                Map<String, Object> body = new HashMap();
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+        Map<String, Object> body = new HashMap();
 
-                body.put("token", token);
-                body.put("message", "Hi! You are now logged in as %s".formatted(username));
-                body.put("username", username);
-                response.getWriter().write(new ObjectMapper().writeValueAsString(body));
-                response.setStatus(200);
-                response.setContentType("application/json");
+        body.put("token", token);
+        body.put("message", "Hi! You are now logged in as %s".formatted(username));
+        body.put("username", username);
+        response.getWriter().write(new ObjectMapper().writeValueAsString(body));
+        response.setStatus(200);
+        response.setContentType("application/json");
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException failed) throws IOException, ServletException {
 
-                Map<String, Object> body = new HashMap<>();
-                body.put("message", "Login error. Check your credentials and try again");
-                body.put("error", failed.getMessage());
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", "Login error. Check your credentials and try again");
+        body.put("error", failed.getMessage());
 
-                response.getWriter().write(new ObjectMapper().writeValueAsString(body));
-                response.setStatus(401);
-                response.setContentType("application/json");
+        response.getWriter().write(new ObjectMapper().writeValueAsString(body));
+        response.setStatus(401);
+        response.setContentType("application/json");
     }
 
 }
