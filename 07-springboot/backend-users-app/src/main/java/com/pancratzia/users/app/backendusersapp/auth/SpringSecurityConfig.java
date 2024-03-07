@@ -31,18 +31,16 @@ public class SpringSecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    @SuppressWarnings("removal")
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests()
-        .requestMatchers(HttpMethod.GET, "/users").permitAll()
-        .anyRequest().authenticated()
-        .and()
-        .addFilter(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()))
-        .addFilter(new JwtValidationFilter(authenticationConfiguration.getAuthenticationManager()))
-        .csrf(config -> config.disable())
-        .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .build();
+        return http.authorizeHttpRequests(requests -> requests
+                .requestMatchers(HttpMethod.GET, "/users").permitAll()
+                .anyRequest().authenticated())
+                .addFilter(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()))
+                .addFilter(new JwtValidationFilter(authenticationConfiguration.getAuthenticationManager()))
+                .csrf(config -> config.disable())
+                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .build();
     };
 
 }

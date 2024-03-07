@@ -70,7 +70,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 Map<String, Object> body = new HashMap();
 
                 body.put("token", token);
-                body.put("message", String.format("Hi! You are now logged in as %s", username));
+                body.put("message", "Hi! You are now logged in as %s".formatted(username));
                 body.put("username", username);
                 response.getWriter().write(new ObjectMapper().writeValueAsString(body));
                 response.setStatus(200);

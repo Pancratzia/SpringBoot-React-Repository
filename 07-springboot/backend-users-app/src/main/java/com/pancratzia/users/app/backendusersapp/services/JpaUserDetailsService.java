@@ -28,8 +28,8 @@ public class JpaUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<com.pancratzia.users.app.backendusersapp.models.entities.User> o = repository.findByUsername(username);
 
-        if (!o.isPresent()) {
-            throw new UsernameNotFoundException(String.format("Username %s no existe en el sistema", username));
+        if (o.isEmpty()) {
+            throw new UsernameNotFoundException("Username %s no existe en el sistema".formatted(username));
         }
 
         com.pancratzia.users.app.backendusersapp.models.entities.User user = o.orElseThrow();
