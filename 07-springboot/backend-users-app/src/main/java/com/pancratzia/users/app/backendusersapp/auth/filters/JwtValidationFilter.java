@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pancratzia.users.app.backendusersapp.auth.SimpleGrantedAuthorityJsonCreator;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -48,13 +49,17 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
 
         try {
 
-            Claims claims = Jwts.parser().verifyWith((SecretKey) SECRET_KEY).build().parseSignedClaims(token).getPayload();
+            Claims claims = Jwts.parser().verifyWith((SecretKey) SECRET_KEY).build().parseSignedClaims(token)
+                    .getPayload();
 
             Object authoritiesClaims = claims.get("authorities");
             String username = claims.getSubject();
 
-            Collection<? extends GrantedAuthority> authorities = Arrays.asList(new ObjectMapper().readValue(authoritiesClaims.toString().getBytes(), SimpleGrantedAuthority[].class));
-            
+            Collection<? extends GrantedAuthority> authorities = Arrays
+                    .asList(new ObjectMapper()
+                            .addMixIn(SimpleGrantedAuthority.class, SimpleGrantedAuthorityJsonCreator.class)
+                            .readValue(authoritiesClaims.toString().getBytes(), SimpleGrantedAuthority[].class));
+
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null,
                     authorities);
 
