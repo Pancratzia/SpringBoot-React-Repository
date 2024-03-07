@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "users-app",
-    "dateExported": "2024-03-06T00:23:00.685Z",
+    "dateExported": "2024-03-07T01:47:46.756Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -29,10 +29,14 @@
             "method": "GET",
             "sortNum": 30000,
             "created": "2024-02-24T19:31:25.149Z",
-            "modified": "2024-03-06T00:22:38.208Z",
+            "modified": "2024-03-07T01:47:13.192Z",
             "headers": [],
             "params": [],
             "reqType": "get",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnRodXJvIiwiaWF0IjoxNzA5Nzc1OTcxLCJleHAiOjE3MDk3Nzk1NzF9.IzN67UI31xpKPJjV5yooKrV2iZwdW02Vyk3R7GxfLas"
+            },
             "tests": []
         },
         {
@@ -44,7 +48,7 @@
             "method": "POST",
             "sortNum": 40000,
             "created": "2024-02-24T19:31:52.367Z",
-            "modified": "2024-02-25T02:58:49.751Z",
+            "modified": "2024-03-07T01:47:31.443Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -54,8 +58,13 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"username\": \"Sassy\",\n  \"email\": \"correo5@correo.com\",\n  \"password\": \"123456\"\n}",
+                "raw": "{\n  \"username\": \"Tiffany\",\n  \"email\": \"correotiffany@correo.com\",\n  \"password\": \"12345\"\n}",
                 "form": []
+            },
+            "reqType": "post",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnRodXJvIiwiaWF0IjoxNzA5Nzc1OTcxLCJleHAiOjE3MDk3Nzk1NzF9.IzN67UI31xpKPJjV5yooKrV2iZwdW02Vyk3R7GxfLas"
             },
             "tests": []
         },
@@ -64,11 +73,11 @@
             "colId": "5174c4be-6a09-438d-a21c-a043c2ea095f",
             "containerId": "",
             "name": "PUT USER",
-            "url": "http://127.0.0.1:8080/users/1",
+            "url": "http://127.0.0.1:8080/users/2",
             "method": "PUT",
             "sortNum": 50000,
             "created": "2024-02-24T19:33:03.381Z",
-            "modified": "2024-02-26T20:09:30.796Z",
+            "modified": "2024-03-07T01:46:58.613Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -81,6 +90,11 @@
                 "raw": "{\n  \"username\": \"Pancratzia\",\n  \"email\": \"pancratzia@correo.com\"\n}",
                 "form": []
             },
+            "reqType": "put",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnRodXJvIiwiaWF0IjoxNzA5Nzc1OTcxLCJleHAiOjE3MDk3Nzk1NzF9.IzN67UI31xpKPJjV5yooKrV2iZwdW02Vyk3R7GxfLas"
+            },
             "tests": []
         },
         {
@@ -92,9 +106,14 @@
             "method": "DELETE",
             "sortNum": 60000,
             "created": "2024-02-24T19:37:26.971Z",
-            "modified": "2024-02-24T19:37:46.186Z",
+            "modified": "2024-03-07T01:47:41.437Z",
             "headers": [],
             "params": [],
+            "reqType": "del",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnRodXJvIiwiaWF0IjoxNzA5Nzc1OTcxLCJleHAiOjE3MDk3Nzk1NzF9.IzN67UI31xpKPJjV5yooKrV2iZwdW02Vyk3R7GxfLas"
+            },
             "tests": []
         },
         {
@@ -106,7 +125,7 @@
             "method": "POST",
             "sortNum": 70000,
             "created": "2024-03-06T00:17:19.225Z",
-            "modified": "2024-03-06T00:18:06.498Z",
+            "modified": "2024-03-06T22:21:56.663Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -116,9 +135,10 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"12345\"\n}",
+                "raw": "{\n  \"username\": \"arthuro\",\n  \"password\": \"12345\"\n}",
                 "form": []
             },
+            "reqType": "post",
             "tests": []
         }
     ]
