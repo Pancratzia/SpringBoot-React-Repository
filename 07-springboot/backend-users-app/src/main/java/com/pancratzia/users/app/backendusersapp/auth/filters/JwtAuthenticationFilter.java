@@ -1,6 +1,7 @@
 package com.pancratzia.users.app.backendusersapp.auth.filters;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
@@ -16,6 +18,8 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pancratzia.users.app.backendusersapp.models.entities.User;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ClaimsBuilder;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -63,7 +67,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal())
                 .getUsername();
 
+        Collection<? extends GrantedAuthority> roles  = authResult.getAuthorities();
+
+        boolean isAdmin = roles.stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
+
+        ClaimsBuilder claimsBuilder = Jwts.claims();
+        claimsBuilder.add("authorities", new ObjectMapper().writeValueAsString(roles));
+        claimsBuilder.add("isAdmin", isAdmin);
+
+        Claims claims = claimsBuilder.build();
+
         String token = Jwts.builder()
+                .claims(claims)
                 .subject(username)
                 .signWith(SECRET_KEY)
                 .issuedAt(new Date())
@@ -72,8 +87,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.addHeader(HEADER_AUTHORIZATION, PREFIX_TOKEN + token);
 
-        @SuppressWarnings({ "rawtypes", "unchecked" })
-        Map<String, Object> body = new HashMap();
+        
+        Map<String, Object> body = new HashMap<>();
 
         body.put("token", token);
         body.put("message", "Hi! You are now logged in as %s".formatted(username));

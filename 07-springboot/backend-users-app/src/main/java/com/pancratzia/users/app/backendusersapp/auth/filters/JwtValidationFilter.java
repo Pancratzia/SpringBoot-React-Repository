@@ -1,9 +1,9 @@
 package com.pancratzia.users.app.backendusersapp.auth.filters;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.crypto.SecretKey;
@@ -49,9 +49,12 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
         try {
 
             Claims claims = Jwts.parser().verifyWith((SecretKey) SECRET_KEY).build().parseSignedClaims(token).getPayload();
+
+            Object authoritiesClaims = claims.get("authorities");
             String username = claims.getSubject();
-            List<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+            Collection<? extends GrantedAuthority> authorities = Arrays.asList(new ObjectMapper().readValue(authoritiesClaims.toString().getBytes(), SimpleGrantedAuthority[].class));
+            
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null,
                     authorities);
 
