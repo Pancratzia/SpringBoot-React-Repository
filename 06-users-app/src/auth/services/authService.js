@@ -1,4 +1,13 @@
-export const loginUser = (userLogin) => {
-  const { username, password } = userLogin;
-  return username === "admin" && password === "123" ? true : false;
+import axios from "axios";
+
+export const loginUser = async ({ username, password }) => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await axios.post("http://localhost:8080/login", {
+      username,
+      password,
+    });
+  } catch (error) {
+    throw error;
+  }
 };
