@@ -2,6 +2,15 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/users";
 
+const config = () => {
+  return {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: sessionStorage.getItem("token"),
+    },
+  };
+};
+
 export const findAll = async () => {
   try {
     const response = await axios.get(BASE_URL);
@@ -16,7 +25,11 @@ export const findAll = async () => {
 export const save = async ({ username, email, password }) => {
   // eslint-disable-next-line no-useless-catch
   try {
-    const response = await axios.post(BASE_URL, { username, email, password });
+    const response = await axios.post(
+      BASE_URL,
+      { username, email, password },
+      config()
+    );
     return response;
   } catch (error) {
     throw error;
@@ -24,23 +37,23 @@ export const save = async ({ username, email, password }) => {
 };
 
 export const update = async ({ id, username, email }) => {
-    
   // eslint-disable-next-line no-useless-catch
   try {
-    const response = await axios.put(`${BASE_URL}/${id}`, { username, email});
+    const response = await axios.put(
+      `${BASE_URL}/${id}`,
+      { username, email },
+      config()
+    );
     return response;
-  }
-  catch (error) {
+  } catch (error) {
     throw error;
   }
-
-}
+};
 
 export const remove = async (id) => {
   try {
-    await axios.delete(`${BASE_URL}/${id}`);
-  }
-  catch (error) {
+    await axios.delete(`${BASE_URL}/${id}`, config());
+  } catch (error) {
     console.error(error);
   }
-}
+};
