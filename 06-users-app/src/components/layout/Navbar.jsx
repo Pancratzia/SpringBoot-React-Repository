@@ -1,10 +1,8 @@
-
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../auth/context/AuthContext";
 
 const Navbar = () => {
-
   const { login, handlerLogout } = useContext(AuthContext);
 
   return (
@@ -22,11 +20,13 @@ const Navbar = () => {
               Usuarios
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/users/register">
-              Registro
-            </NavLink>
-          </li>
+          {login.isAdmin && (
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/users/register">
+                Registro
+              </NavLink>
+            </li>
+          )}
         </ul>
 
         <button

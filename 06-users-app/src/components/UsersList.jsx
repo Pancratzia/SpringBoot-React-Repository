@@ -1,12 +1,15 @@
 import UserRow from "./UserRow";
 import { UserContext } from "../context/UserContext";
 import { useContext, useEffect } from "react";
+import { AuthContext } from "../auth/context/AuthContext";
 
 const UsersList = () => {
   const { users = [], getUsers } = useContext(UserContext);
+  const { login } = useContext(AuthContext);
 
   useEffect(() => {
     getUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -16,15 +19,19 @@ const UsersList = () => {
           There are no users registered at this moment
         </p>
       ) : (
-        <table className="table table-striped table-hover">
+        <table className="table table-striped table-hover text-center">
           <thead>
             <tr>
               <th>#</th>
               <th>Username</th>
               <th>Email</th>
-              <th>Update</th>
-              <th>Advanced Update</th>
-              <th>Delete</th>
+              {login.isAdmin && (
+                <>
+                  <th>Update</th>
+                  <th>Advanced Update</th>
+                  <th>Delete</th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
