@@ -37,7 +37,10 @@ export const useUsers = () => {
 
   const handlerAddUser = async (user) => {
 
-    if(!login.Admin) return;
+    if(!login.isAdmin){
+      return;
+    }
+
     let response;
 
     try {
@@ -83,8 +86,10 @@ export const useUsers = () => {
 
   const handlerRemoveUser = (id) => {
 
-    if(!login.Admin) return;
-    
+    if(!login.isAdmin){
+      return;
+    }
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
