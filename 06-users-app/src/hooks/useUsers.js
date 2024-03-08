@@ -1,11 +1,16 @@
-import { useContext, useReducer, useState } from "react";
-import { usersReducer } from "../reducers/usersReducer";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { findAll, remove, save, update } from "../services/userService";
 import { AuthContext } from "../auth/context/AuthContext";
-
-const initialUsers = [];
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import {
+  ADD_USER,
+  LOADING_USERS,
+  REMOVE_USER,
+  UPDATE_USER,
+} from "../store/slices/users/usersSlice";
 
 const initialUserForm = {
   id: 0,
@@ -22,8 +27,9 @@ const initialErrors = {
 };
 
 export const useUsers = () => {
+  const { users } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   const { login, handlerLogout } = useContext(AuthContext);
-  const [users, dispatch] = useReducer(usersReducer, initialUsers);
   const [userSelected, setUserSelected] = useState(initialUserForm);
   const [visibleForm, setVisibleForm] = useState(false);
 
@@ -33,7 +39,7 @@ export const useUsers = () => {
   const getUsers = async () => {
     try {
       const result = await findAll();
-      dispatch({ type: "LOADING_USERS", payload: result.data || [] });
+      dispatch(LOADING_USERS(result.data));
     } catch (error) {
       if (error.response?.status === 401) {
         handlerLogout();
@@ -51,14 +57,11 @@ export const useUsers = () => {
     try {
       if (user.id === 0) {
         response = await save(user);
+        dispatch(ADD_USER({ ...response.data }));
       } else {
         response = await update(user);
+        dispatch(UPDATE_USER({ ...response.data }));
       }
-
-      dispatch({
-        type: user.id === 0 ? "ADD_USER" : "UPDATE_USER",
-        payload: response.data,
-      });
 
       const message =
         userSelected.id === 0
@@ -108,7 +111,7 @@ export const useUsers = () => {
       if (result.isConfirmed) {
         try {
           await remove(id);
-          dispatch({ type: "REMOVE_USER", payload: id });
+          dispatch(REMOVE_USER(id));
           Swal.fire("Deleted!", "User deleted successfully", "success");
         } catch (error) {
           if (error.response && error.response.status === 401) {
