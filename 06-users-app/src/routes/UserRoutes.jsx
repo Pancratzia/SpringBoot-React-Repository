@@ -2,7 +2,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import UsersPage from "../pages/UsersPage.jsx";
 import Navbar from "../components/layout/Navbar.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
-import { UserProvider } from "../context/UserProvider.jsx";
 import { useContext } from "react";
 import { AuthContext } from "../auth/context/AuthContext";
 
@@ -11,7 +10,6 @@ const UserRoutes = () => {
 
   return (
     <>
-      <UserProvider>
         <Navbar />
         <Routes>
           <Route path="users" element={<UsersPage />} />
@@ -25,7 +23,6 @@ const UserRoutes = () => {
 
           <Route path="/" element={<Navigate to="/users" />} />
         </Routes>
-      </UserProvider>
     </>
   );
 };
