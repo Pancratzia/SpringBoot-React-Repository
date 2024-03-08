@@ -1,17 +1,12 @@
-import { useReducer } from "react";
-import { loginReducer } from "../reducers/loginReducer";
 import Swal from "sweetalert2";
 import { loginUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
-
-const initialLogin = JSON.parse(sessionStorage.getItem("login")) || {
-  user: undefined,
-  isAdmin: false,
-  isAuth: false,
-};
+import { useDispatch, useSelector } from "react-redux";
+import { ON_LOGIN, ON_LOGOUT } from "../../store/slices/auth/authSlice";
 
 export const useAuth = () => {
-  const [login, dispatch] = useReducer(loginReducer, initialLogin);
+  const dispatch = useDispatch();
+  const { user, isAdmin, isAuth } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const handlerLogin = async ({ username, password }) => {
@@ -23,13 +18,12 @@ export const useAuth = () => {
         username: claims.username,
       };
 
-      dispatch({
-        type: "LOGIN_USER",
-        payload: {
+      dispatch(
+        ON_LOGIN({
           user,
           isAdmin: claims.isAdmin,
-        },
-      });
+        })
+      );
 
       sessionStorage.setItem(
         "login",
@@ -44,25 +38,25 @@ export const useAuth = () => {
 
       navigate("/users");
     } catch (error) {
-      if(error.response?.status === 401) {
+      if (error.response?.status === 401) {
         Swal.fire("Error", "Invalid credentials", "error");
-      }else if(error.response?.status === 400) {
+      } else if (error.response?.status === 400) {
         Swal.fire("Error", "You cannot access this resource", "error");
-      }else{
+      } else {
         throw error;
       }
     }
   };
 
   const handlerLogout = () => {
-    dispatch({ type: "LOGOUT_USER" });
+    dispatch(ON_LOGOUT());
     sessionStorage.removeItem("login");
     sessionStorage.removeItem("token");
     sessionStorage.clear();
   };
 
   return {
-    login,
+    login: {user, isAdmin, isAuth},
     handlerLogin,
     handlerLogout,
   };
