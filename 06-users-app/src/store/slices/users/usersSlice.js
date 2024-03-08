@@ -23,19 +23,19 @@ export const userSlice = createSlice({
     errors: initialErrors,
   },
   reducers: {
-    ADD_USER: (state, action) => {
-      state.users = [...state.users, { ...action.payload }];
+    ADD_USER: (state, {payload}) => {
+      state.users = [...state.users, { ...payload }];
       state.userSelected = initialUserForm;
       state.visibleForm = false;
     },
-    REMOVE_USER: (state, action) => {
-      state.users = state.users.filter((user) => user.id !== action.payload);
+    REMOVE_USER: (state, {payload}) => {
+      state.users = state.users.filter((user) => user.id !== payload);
     },
-    UPDATE_USER: (state, action) => {
+    UPDATE_USER: (state, {payload}) => {
       state.users = state.users.map((user) => {
-        if (user.id === action.payload.id) {
+        if (user.id === payload.id) {
           return {
-            ...action.payload,
+            ...payload,
           };
         }
         return user;
@@ -43,11 +43,11 @@ export const userSlice = createSlice({
       state.userSelected = initialUserForm;
       state.visibleForm = false;
     },
-    LOADING_USERS: (state, action) => {
-      state.users = action.payload;
+    LOADING_USERS: (state, {payload}) => {
+      state.users = payload;
     },
-    ON_USER_SELECTED_FORM: (state, action) => {
-      state.userSelected = action.payload;
+    ON_USER_SELECTED_FORM: (state, {payload}) => {
+      state.userSelected = payload;
       state.visibleForm = true;
     },
     ON_OPEN_FORM: (state) => {
@@ -56,6 +56,9 @@ export const userSlice = createSlice({
     ON_CLOSE_FORM: (state) => {
       state.visibleForm = false;
       state.userSelected = initialUserForm;
+    },
+    ON_ERROR: (state, {payload}) => {
+        state.errors = payload
     }
   },
 });
