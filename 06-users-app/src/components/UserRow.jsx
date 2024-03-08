@@ -5,7 +5,7 @@ import { UserContext } from "../context/UserContext";
 import { AuthContext } from "../auth/context/AuthContext";
 
 const UserRow = ({ user }) => {
-  const { id, username, email } = user;
+  const { id, username, email, admin } = user;
   const { handlerRemoveUser, handlerUserSelectedForm } =
     useContext(UserContext);
   const { login } = useContext(AuthContext);
@@ -25,6 +25,7 @@ const UserRow = ({ user }) => {
                   id,
                   username,
                   email,
+                  admin
                 })
               }
             >
