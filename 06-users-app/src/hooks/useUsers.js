@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { findAll, remove, save, update } from "../services/userService";
@@ -6,34 +6,23 @@ import { AuthContext } from "../auth/context/AuthContext";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
+  initialUserForm,
   ADD_USER,
   LOADING_USERS,
+  ON_CLOSE_FORM,
+  ON_OPEN_FORM,
+  ON_USER_SELECTED_FORM,
   REMOVE_USER,
   UPDATE_USER,
 } from "../store/slices/users/usersSlice";
 
-const initialUserForm = {
-  id: 0,
-  username: "",
-  password: "",
-  email: "",
-  admin: false,
-};
 
-const initialErrors = {
-  username: "",
-  email: "",
-  password: "",
-};
 
 export const useUsers = () => {
-  const { users } = useSelector((state) => state.users);
+  const { users, visibleForm, userSelected, errors } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const { login, handlerLogout } = useContext(AuthContext);
-  const [userSelected, setUserSelected] = useState(initialUserForm);
-  const [visibleForm, setVisibleForm] = useState(false);
 
-  const [errors, setErrors] = useState(initialErrors);
   const navigate = useNavigate();
 
   const getUsers = async () => {
@@ -125,31 +114,29 @@ export const useUsers = () => {
   };
 
   const handlerUserSelectedForm = (user) => {
-    setVisibleForm(true);
-    setUserSelected({ ...user });
+    dispatch(ON_USER_SELECTED_FORM({ ...user }));
   };
 
   const handlerOpenForm = () => {
-    setVisibleForm(true);
+    dispatch(ON_OPEN_FORM());
   };
 
   const handlerCloseForm = () => {
-    setVisibleForm(false);
-    setUserSelected(initialUserForm);
-    setErrors(initialErrors);
+    
+    dispatch(ON_CLOSE_FORM());
   };
 
   return {
-    users,
-    userSelected,
     initialUserForm,
+    users,
     handlerAddUser,
     handlerRemoveUser,
     handlerUserSelectedForm,
-    visibleForm,
     handlerOpenForm,
     handlerCloseForm,
     getUsers,
-    errors,
+    visibleForm,
+    userSelected,
+    errors
   };
 };
