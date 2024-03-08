@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
   initialUserForm,
+  initialErrors,
   ADD_USER,
   LOADING_USERS,
   ON_CLOSE_FORM,
@@ -14,6 +15,7 @@ import {
   ON_USER_SELECTED_FORM,
   REMOVE_USER,
   UPDATE_USER,
+  SET_ERROR,
 } from "../store/slices/users/usersSlice";
 
 
@@ -62,18 +64,18 @@ export const useUsers = () => {
       navigate("/users");
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        setErrors(error.response.data);
+        dispatch(SET_ERROR(error.response.data));
       } else if (
         error.response &&
         error.response.status === 500 &&
         error.response.data?.message?.includes("constraint")
       ) {
         if (error.response.data?.message?.includes("UK_username")) {
-          setErrors({ username: "Username already exists" });
+          dispatch(SET_ERROR({ username: "Username already exists" }));
         }
 
         if (error.response.data?.message?.includes("UK_email")) {
-          setErrors({ email: "Email already exists" });
+          dispatch(SET_ERROR({ email: "Email already exists" }));
         }
       } else if (error.response?.status === 401) {
         handlerLogout();
@@ -124,19 +126,20 @@ export const useUsers = () => {
   const handlerCloseForm = () => {
     
     dispatch(ON_CLOSE_FORM());
+    dispatch(SET_ERROR(initialErrors));
   };
 
   return {
-    initialUserForm,
     users,
+    userSelected,
+    initialUserForm,
+    visibleForm,
+    errors,
     handlerAddUser,
     handlerRemoveUser,
     handlerUserSelectedForm,
     handlerOpenForm,
     handlerCloseForm,
     getUsers,
-    visibleForm,
-    userSelected,
-    errors
   };
 };

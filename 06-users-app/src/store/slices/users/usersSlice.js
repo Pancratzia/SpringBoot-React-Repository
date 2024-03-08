@@ -8,7 +8,7 @@ export const initialUserForm = {
     admin: false,
   };
 
-  const initialErrors = {
+  export const initialErrors = {
     username: "",
     email: "",
     password: "",
@@ -57,11 +57,11 @@ export const userSlice = createSlice({
       state.visibleForm = false;
       state.userSelected = initialUserForm;
     },
-    ON_ERROR: (state, {payload}) => {
+    SET_ERROR: (state, {payload}) => {
         state.errors = payload
     }
   },
 });
 
-export const { ADD_USER, REMOVE_USER, UPDATE_USER, LOADING_USERS, ON_USER_SELECTED_FORM, ON_OPEN_FORM, ON_CLOSE_FORM } =
+export const { ADD_USER, REMOVE_USER, UPDATE_USER, LOADING_USERS, ON_USER_SELECTED_FORM, ON_OPEN_FORM, ON_CLOSE_FORM, SET_ERROR} =
   userSlice.actions;
