@@ -2,6 +2,8 @@ package com.pancratzia.users.app.backendusersapp.models.entities;
 
 import java.util.List;
 
+import com.pancratzia.users.app.backendusersapp.models.IUser;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +21,7 @@ import jakarta.persistence.GenerationType;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements IUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,6 +81,7 @@ public class User {
         this.roles = roles;
     }
 
+    @Override
     public boolean isAdmin() {
         return admin;
     }

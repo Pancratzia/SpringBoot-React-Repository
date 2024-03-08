@@ -1,10 +1,12 @@
 package com.pancratzia.users.app.backendusersapp.models.request;
 
+import com.pancratzia.users.app.backendusersapp.models.IUser;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class UserRequest {
+public class UserRequest implements IUser {
 
     @NotBlank
     @Size(min = 4, max = 12)
@@ -33,6 +35,7 @@ public class UserRequest {
         this.admin = admin;
     }
 
+    @Override
     public boolean isAdmin() {
         return admin;
     }

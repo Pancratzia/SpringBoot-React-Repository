@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pancratzia.users.app.backendusersapp.models.IUser;
 import com.pancratzia.users.app.backendusersapp.models.dto.UserDto;
 import com.pancratzia.users.app.backendusersapp.models.dto.mapper.DtoMapperUser;
 import com.pancratzia.users.app.backendusersapp.models.entities.Role;
@@ -49,14 +50,8 @@ public class UserServiceImpl implements UserService {
         String passwordBc = passwordEncoder.encode(user.getPassword());
         user.setPassword(passwordBc);
 
-        Optional<Role> o = roleRepository.findByName("ROLE_USER");
-        List<Role> roles = new ArrayList<>();
-        if(o.isPresent()) {
-            roles.add(o.orElseThrow());
-        }
+        user.setRoles(getRoles(user));
 
-        user.setRoles(roles);
-        
         return DtoMapperUser.builder().setUser(repository.save(user)).build();
     }
 
@@ -72,14 +67,33 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> o = repository.findById(id);
         User userOptional = null;
-        if(o.isPresent()) {
+        if (o.isPresent()) {
+
             User userDb = o.orElseThrow();
+            userDb.setRoles(getRoles(user));
             userDb.setUsername(user.getUsername());
             userDb.setEmail(user.getEmail());
             userOptional = repository.save(userDb);
         }
 
         return Optional.ofNullable(DtoMapperUser.builder().setUser(userOptional).build());
+    }
+
+    private List<Role> getRoles(IUser user) {
+        Optional<Role> ou = roleRepository.findByName("ROLE_USER");
+        List<Role> roles = new ArrayList<>();
+        if (ou.isPresent()) {
+            roles.add(ou.orElseThrow());
+        }
+
+        if (user.isAdmin()) {
+            Optional<Role> oa = roleRepository.findByName("ROLE_ADMIN");
+            if (oa.isPresent()) {
+                roles.add(oa.orElseThrow());
+            }
+        }
+
+        return roles;
     }
 
 }
