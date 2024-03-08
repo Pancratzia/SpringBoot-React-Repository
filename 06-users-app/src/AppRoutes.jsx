@@ -1,17 +1,17 @@
 
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
-import UserRoutes from "./src/routes/UserRoutes";
-import LoginPage from "./src/auth/pages/LoginPage";
+import UserRoutes from "./routes/UserRoutes";
+import LoginPage from "./auth/pages/LoginPage";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "./src/auth/hooks/useAuth";
+import { useSelector } from "react-redux";
 
 export const AppRoutes = () => {
-    const { login } = useAuth();
+    const {isAuth } = useSelector((state) => state.auth);
 
     return (
       <Routes>
-        {login.isAuth ? (
+        {isAuth ? (
           <>
             <Route
               path="*"

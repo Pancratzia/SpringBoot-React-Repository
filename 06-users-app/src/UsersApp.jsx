@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
-import { AppRoutes } from "../AppRoutes.jsx";
 import { store } from "./store/store.js";
+import { AppRoutes } from "./AppRoutes.jsx";
 
 
 function UsersApp() {
