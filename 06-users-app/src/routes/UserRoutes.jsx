@@ -3,19 +3,25 @@ import UsersPage from "../pages/UsersPage.jsx";
 import Navbar from "../components/layout/Navbar.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
 import { UserProvider } from "../context/UserProvider.jsx";
+import { useContext } from "react";
+import { AuthContext } from "../auth/context/AuthContext";
 
 const UserRoutes = () => {
+  const { login } = useContext(AuthContext);
 
   return (
     <>
       <UserProvider>
-        <Navbar/>
+        <Navbar />
         <Routes>
           <Route path="users" element={<UsersPage />} />
 
-          <Route path="users/register" element={<RegisterPage />} />
-
-          <Route path="users/edit/:id" element={<RegisterPage />} />
+          {(login.isAuth && login.isAdmin) && (
+            <>
+              <Route path="users/register" element={<RegisterPage />} />
+              <Route path="users/edit/:id" element={<RegisterPage />} />
+            </>
+          )}
 
           <Route path="/" element={<Navigate to="/users" />} />
         </Routes>
@@ -25,4 +31,3 @@ const UserRoutes = () => {
 };
 
 export default UserRoutes;
-

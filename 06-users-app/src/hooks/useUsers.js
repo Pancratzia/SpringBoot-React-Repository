@@ -1,8 +1,9 @@
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import { usersReducer } from "../reducers/usersReducer";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { findAll, remove, save, update } from "../services/userService";
+import { AuthContext } from "../auth/context/AuthContext";
 
 const initialUsers = [];
 
@@ -20,6 +21,8 @@ const initialErrors = {
 };
 
 export const useUsers = () => {
+
+  const { login } = useContext(AuthContext);
   const [users, dispatch] = useReducer(usersReducer, initialUsers);
   const [userSelected, setUserSelected] = useState(initialUserForm);
   const [visibleForm, setVisibleForm] = useState(false);
@@ -33,6 +36,8 @@ export const useUsers = () => {
   };
 
   const handlerAddUser = async (user) => {
+
+    if(!login.Admin) return;
     let response;
 
     try {
@@ -77,6 +82,9 @@ export const useUsers = () => {
   };
 
   const handlerRemoveUser = (id) => {
+
+    if(!login.Admin) return;
+    
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
