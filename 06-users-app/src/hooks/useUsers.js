@@ -1,8 +1,6 @@
-import { useContext } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { findAll, remove, save, update } from "../services/userService";
-import { AuthContext } from "../auth/context/AuthContext";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
@@ -17,13 +15,14 @@ import {
   UPDATE_USER,
   SET_ERROR,
 } from "../store/slices/users/usersSlice";
+import { useAuth } from "../auth/hooks/useAuth";
 
 
 
 export const useUsers = () => {
   const { users, visibleForm, userSelected, errors } = useSelector((state) => state.users);
   const dispatch = useDispatch();
-  const { login, handlerLogout } = useContext(AuthContext);
+  const { login, handlerLogout } = useAuth();
 
   const navigate = useNavigate();
 
