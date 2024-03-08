@@ -21,8 +21,7 @@ const initialErrors = {
 };
 
 export const useUsers = () => {
-
-  const { login } = useContext(AuthContext);
+  const { login, handlerLogout } = useContext(AuthContext);
   const [users, dispatch] = useReducer(usersReducer, initialUsers);
   const [userSelected, setUserSelected] = useState(initialUserForm);
   const [visibleForm, setVisibleForm] = useState(false);
@@ -36,8 +35,7 @@ export const useUsers = () => {
   };
 
   const handlerAddUser = async (user) => {
-
-    if(!login.isAdmin){
+    if (!login.isAdmin) {
       return;
     }
 
@@ -64,29 +62,30 @@ export const useUsers = () => {
       handlerCloseForm();
       navigate("/users");
     } catch (error) {
-      if(error.response && error.response.status === 400){
+      if (error.response && error.response.status === 400) {
         setErrors(error.response.data);
-      }else if(error.response && error.response.status === 500 && error.response.data?.message?.includes("constraint")){
-        
-        if(error.response.data?.message?.includes("UK_username")){
-          setErrors({username: "Username already exists"
-          })
+      } else if (
+        error.response &&
+        error.response.status === 500 &&
+        error.response.data?.message?.includes("constraint")
+      ) {
+        if (error.response.data?.message?.includes("UK_username")) {
+          setErrors({ username: "Username already exists" });
         }
 
-        if(error.response.data?.message?.includes("UK_email")){
-          setErrors({email: "Email already exists"
-          })
+        if (error.response.data?.message?.includes("UK_email")) {
+          setErrors({ email: "Email already exists" });
         }
-      
-      }else{
+      } else if (error.response && error.response.status === 401) {
+        handlerLogout();
+      } else {
         throw error;
       }
     }
   };
 
   const handlerRemoveUser = (id) => {
-
-    if(!login.isAdmin){
+    if (!login.isAdmin) {
       return;
     }
 
@@ -98,11 +97,19 @@ export const useUsers = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async(result) => {
       if (result.isConfirmed) {
-        remove(id);
-        dispatch({ type: "REMOVE_USER", payload: id });
-        Swal.fire("Deleted!", "User deleted successfully", "success");
+        try {
+          await remove(id);
+          dispatch({ type: "REMOVE_USER", payload: id });
+          Swal.fire("Deleted!", "User deleted successfully", "success");
+        } catch (error) {
+          if (error.response && error.response.status === 401) {
+            handlerLogout();
+          }else{
+            Swal.fire("Error", error.response.data.message, "error");
+          }
+        }
       }
     });
   };
