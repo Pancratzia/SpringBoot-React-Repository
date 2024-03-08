@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { UserContext } from "../context/UserContext";
+import { useUsers } from "../hooks/useUsers";
 
 const UserForm = ({ userSelected, handlerCloseForm }) => {
-  const { handlerAddUser, initialUserForm, errors } = useContext(UserContext);
+  const { handlerAddUser, initialUserForm, errors } = useUsers();
   const [userForm, setUserForm] = useState(initialUserForm);
   const [checked, setChecked] = useState(userForm.admin);
   const { username, password, email, id, admin } = userForm;

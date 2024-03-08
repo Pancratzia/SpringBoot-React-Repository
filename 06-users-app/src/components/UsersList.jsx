@@ -1,10 +1,10 @@
 import UserRow from "./UserRow";
-import { UserContext } from "../context/UserContext";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../auth/context/AuthContext";
+import { useUsers } from "../hooks/useUsers";
 
 const UsersList = () => {
-  const { users = [], getUsers } = useContext(UserContext);
+  const { users = [], getUsers } = useUsers();
   const { login } = useContext(AuthContext);
 
   useEffect(() => {
