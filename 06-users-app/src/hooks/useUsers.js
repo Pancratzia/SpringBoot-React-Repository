@@ -31,8 +31,14 @@ export const useUsers = () => {
   const navigate = useNavigate();
 
   const getUsers = async () => {
-    const result = await findAll();
-    dispatch({ type: "LOADING_USERS", payload: result.data || [] });
+    try {
+      const result = await findAll();
+      dispatch({ type: "LOADING_USERS", payload: result.data || [] });
+    } catch (error) {
+      if (error.response?.status === 401) {
+        handlerLogout();
+      }
+    }
   };
 
   const handlerAddUser = async (user) => {
@@ -77,7 +83,7 @@ export const useUsers = () => {
         if (error.response.data?.message?.includes("UK_email")) {
           setErrors({ email: "Email already exists" });
         }
-      } else if (error.response && error.response.status === 401) {
+      } else if (error.response?.status === 401) {
         handlerLogout();
       } else {
         throw error;
@@ -98,7 +104,7 @@ export const useUsers = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then(async(result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           await remove(id);
@@ -107,7 +113,7 @@ export const useUsers = () => {
         } catch (error) {
           if (error.response && error.response.status === 401) {
             handlerLogout();
-          }else{
+          } else {
             Swal.fire("Error", error.response.data.message, "error");
           }
         }
