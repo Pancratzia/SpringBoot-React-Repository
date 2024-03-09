@@ -2,11 +2,20 @@ import UserModalForm from "../components/UserModalForm";
 import UsersList from "../components/UsersList";
 import { useUsers } from "../hooks/useUsers";
 import { useAuth } from "../auth/hooks/useAuth";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const UsersPage = () => {
-  const { visibleForm, isLoading, handlerOpenForm } = useUsers();
+
+  const { page } = useParams();
+  const { visibleForm, isLoading, handlerOpenForm, getUsers } = useUsers();
 
   const { login } = useAuth();
+
+  useEffect(() => {
+    getUsers(page);
+  // eslint-disable-next-line react-hooks/exhaustive-deps, no-sparse-arrays
+  }, [, page]);
 
 
   return (

@@ -12,6 +12,7 @@ const UserRoutes = () => {
         <Navbar />
         <Routes>
           <Route path="users" element={<UsersPage />} />
+          <Route path="users/page/:page" element={<UsersPage />} />
 
           {(isAdmin) && (
             <>

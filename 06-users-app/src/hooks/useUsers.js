@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { findAll, remove, save, update } from "../services/userService";
+import { findAllPages, remove, save, update } from "../services/userService";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
@@ -20,15 +20,15 @@ import { useAuth } from "../auth/hooks/useAuth";
 
 
 export const useUsers = () => {
-  const { users, visibleForm, userSelected, errors, isLoading } = useSelector((state) => state.users);
+  const { users, visibleForm, userSelected, errors, isLoading, paginator } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const { login, handlerLogout } = useAuth();
 
   const navigate = useNavigate();
 
-  const getUsers = async () => {
+  const getUsers = async (page = 0) => {
     try {
-      const result = await findAll();
+      const result = await findAllPages(page);
       dispatch(LOADING_USERS(result.data));
     } catch (error) {
       if (error.response?.status === 401) {
@@ -135,6 +135,7 @@ export const useUsers = () => {
     visibleForm,
     errors,
     isLoading,
+    paginator,
     handlerAddUser,
     handlerRemoveUser,
     handlerUserSelectedForm,

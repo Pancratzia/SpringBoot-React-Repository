@@ -11,14 +11,25 @@ export const findAll = async () => {
     throw error;
   }
 };
+export const findAllPages = async (page = 0) => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const response = await usersApi.get(`${BASE_URL}/page/${page}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const save = async ({ username, email, password, admin }) => {
   // eslint-disable-next-line no-useless-catch
   try {
-    const response = await usersApi.post(
-      BASE_URL,
-      { username, email, password, admin }
-    );
+    const response = await usersApi.post(BASE_URL, {
+      username,
+      email,
+      password,
+      admin,
+    });
     return response;
   } catch (error) {
     throw error;
@@ -28,10 +39,11 @@ export const save = async ({ username, email, password, admin }) => {
 export const update = async ({ id, username, email, admin }) => {
   // eslint-disable-next-line no-useless-catch
   try {
-    const response = await usersApi.put(
-      `${BASE_URL}/${id}`,
-      { username, email, admin },
-    );
+    const response = await usersApi.put(`${BASE_URL}/${id}`, {
+      username,
+      email,
+      admin,
+    });
     return response;
   } catch (error) {
     throw error;
