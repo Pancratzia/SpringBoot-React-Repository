@@ -2,9 +2,10 @@ package com.pancratzia.users.app.backendusersapp.repositories;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
 import com.pancratzia.users.app.backendusersapp.models.entities.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
@@ -14,4 +15,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE u.username = ?1")
     Optional<User> getUserByUsername(String username); //Metodo 2
+
+    Page<User> findAll(Pageable pageable);
 }
