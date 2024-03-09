@@ -9,7 +9,7 @@ import Paginator from "../components/Paginator";
 const UsersPage = () => {
 
   const { page } = useParams();
-  const { visibleForm, isLoading, handlerOpenForm, getUsers } = useUsers();
+  const { visibleForm, isLoading, handlerOpenForm, getUsers, paginator } = useUsers();
 
   const { login } = useAuth();
 
@@ -41,8 +41,8 @@ const UsersPage = () => {
                 Nuevo Usuario
               </button>
             )}
+            <Paginator url="/users/page" paginator={paginator} />
             <UsersList />
-            <Paginator url="/users/page" />
           </div>
         </div>
       </div>
