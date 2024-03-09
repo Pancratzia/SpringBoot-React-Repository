@@ -4,13 +4,21 @@ import { useUsers } from "../hooks/useUsers";
 import { useAuth } from "../auth/hooks/useAuth";
 
 const UsersPage = () => {
-  const { visibleForm, handlerOpenForm } = useUsers();
+  const { visibleForm, isLoading, handlerOpenForm } = useUsers();
 
   const { login } = useAuth();
 
+
   return (
     <>
-      {visibleForm && <UserModalForm />}
+      {isLoading &&  
+      <div className="container my-4 text-center"> 
+        <div className="spinner-border text-warning" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>}
+
+      {visibleForm && !isLoading && <UserModalForm />}
       <div className="container my-4">
         <h2>Users App</h2>
         <div className="row my-4">
