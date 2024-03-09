@@ -4,6 +4,7 @@ import { useUsers } from "../hooks/useUsers";
 import { useAuth } from "../auth/hooks/useAuth";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import Paginator from "../components/Paginator";
 
 const UsersPage = () => {
 
@@ -41,6 +42,7 @@ const UsersPage = () => {
               </button>
             )}
             <UsersList />
+            <Paginator url="/users/page" />
           </div>
         </div>
       </div>
