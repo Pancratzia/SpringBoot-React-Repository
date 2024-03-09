@@ -7,7 +7,7 @@ const Paginator = ({ url }) => {
 
   return (
     <>
-      {paginator?.size === 0 || (
+      {paginator?.totalPages == 1 || (
         <ul className="pagination">
 
           {paginator.number === 0 || (
