@@ -34,6 +34,11 @@ public class UserController {
 
     @GetMapping
     public List<UserDto> list() {
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return service.findAll();
     }
 

@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import { loginUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ON_LOGIN, ON_LOGOUT } from "../../store/slices/auth/authSlice";
+import { ON_LOGIN, ON_LOGOUT, ON_INITIAL_LOGIN } from "../../store/slices/auth/authSlice";
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -11,6 +11,7 @@ export const useAuth = () => {
 
   const handlerLogin = async ({ username, password }) => {
     try {
+      dispatch(ON_INITIAL_LOGIN());
       const response = await loginUser({ username, password });
       const token = response.data.token;
       const claims = JSON.parse(window.atob(token.split(".")[1]));
@@ -38,6 +39,7 @@ export const useAuth = () => {
 
       navigate("/users");
     } catch (error) {
+      dispatch(ON_LOGOUT());
       if (error.response?.status === 401) {
         Swal.fire("Error", "Invalid credentials", "error");
       } else if (error.response?.status === 400) {
